@@ -1,4 +1,6 @@
 #include "testRunner.h"
+#include "testPawn.h"
+#include "testGame.h"
 #include <iostream>
 
 using namespace std;
@@ -6,7 +8,7 @@ using namespace std;
 void TestRunner::run()
 {
 	testPawn();
-	testBoard();
+	testGame();
 	cout << "All tests pass.";
 }
 
@@ -16,8 +18,8 @@ void TestRunner::testPawn()
 	test.run();
 }
 
-void TestRunner::testBoard()
+void TestRunner::testGame()
 {
-	TestBoard test;
+	TestGame test;
 	test.run();
 }

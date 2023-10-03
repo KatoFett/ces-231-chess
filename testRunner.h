@@ -7,6 +7,6 @@ public:
 private:
 
 	void testPawn();
-	void testBoard();
+	void testGame();
 };
 

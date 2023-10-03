@@ -10,6 +10,7 @@
 #include <cassert>        // for ASSERT
 #include <fstream>        // for IFSTREAM
 #include <string>         // for STRING
+#include "testRunner.h"	  // for tests
 using namespace std;
 
 /***************************************************
@@ -111,6 +112,10 @@ int WINAPI WinMain(
 int main(int argc, char** argv)
 #endif // !_WIN32
 {
+	// Run tests
+	TestRunner tests;
+	tests.run();
+
 	Interface ui("Chess");
 
 	//#ifdef _WIN32
