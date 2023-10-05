@@ -12,6 +12,12 @@ protected:
 public:
 
     Piece(Square square, Player player);
+
+    Square getSquare();
+    Player getPlayer();
+    bool getHasMoved();
+
+
 };
 
 

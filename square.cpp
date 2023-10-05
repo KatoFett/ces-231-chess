@@ -25,10 +25,10 @@ void Square::setPiece(Piece* newPiece) {
 bool Square::getIsDark() {
     return isDark;
 }
-//
-//Square& Square::getLeft()  {
-//   
-//}
+
+Square& Square::getLeft()  {
+    return Square(row - 1, col, isDark);
+}
 //Square& Square::getRight()  {
 //
 Square& Square::getUp() {
