@@ -6,7 +6,7 @@
 class Piece
 {
 protected:
-    Player* player;
+    Player player;
     Square& square;
     bool hasMoved;
 public:

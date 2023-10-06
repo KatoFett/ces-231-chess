@@ -1,9 +1,18 @@
 #include "player.h"
+//#include "piece.h"
 
-Player::Player(Direction direction, int color) {
 
-}
+
+
 
 int Player::getColor() {
 	return color[3];
+}
+
+
+void Player::addPiece(Piece piece) {
+	pieces.insert(piece);
+}
+void Player::removePiece(Piece &piece) {
+	pieces.erase(piece);
 }

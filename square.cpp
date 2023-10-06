@@ -1,6 +1,7 @@
 #include "square.h"
+#include <stdexcept>
 
-
+using namespace std;
 
 Square::Square(int row, int col, bool isDark) : row(row), col(col), isDark(isDark) {
 
@@ -27,21 +28,49 @@ bool Square::getIsDark() {
 }
 
 Square& Square::getLeft()  {
-    return Square(row - 1, col, isDark);
+   
+
+    //Will need to be changed later to handle different board sizes
+    if (col < 0) {
+        return Square(row, col -1, isDark);
+    }
+    else {
+        throw std::out_of_range("Out of bounds");
+    }
 }
-//Square& Square::getRight()  {
-//
+Square& Square::getRight()  {
+
+
+    //Will need to be changed later to handle different board sizes
+    if (col > 8) {
+        return Square(row, col + 1, isDark);
+    }
+    else {
+        throw std::out_of_range("Out of bounds");
+    }
+
+}
 Square& Square::getUp() {
 
-
-    return Square(row, col + 1, isDark);
+    //Will need to be changed later to handle different board sizes
+    if(row  > 8)
+     return Square(row + 1, col, isDark);
+    else {
+        throw std::out_of_range("Out of bounds");
+    }
 
 
 }
-//
-//Square& Square::getDown()  {
-//    return 
-//}
+
+Square& Square::getDown()  {
+
+    //Will need to be changed later to handle different board sizes
+    if (row > 0)
+        return  Square(row - 1, col, isDark);
+    else {
+        throw std::out_of_range ("Out of bounds");
+    }
+}
 //
 //std::string Square::getNotation()  {
 //}
