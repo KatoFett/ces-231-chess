@@ -23,6 +23,8 @@ public:
     Square& getUp(Direction direction);
     Square& getDown(Direction direction);
     std::string getNotation();
+    bool operator != (const nullptr_t& rhs) const;
+    
 };
 
 

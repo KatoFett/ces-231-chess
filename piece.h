@@ -9,6 +9,7 @@ protected:
     Player player;
     Square& square;
     bool hasMoved;
+    char* name;
 public:
 
     Piece(Square square, Player player);
@@ -16,6 +17,7 @@ public:
     Square getSquare();
     Player getPlayer();
     bool getHasMoved();
+    char* getName();
 
 
 };

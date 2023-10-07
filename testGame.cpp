@@ -20,7 +20,7 @@ void TestGame::testInitDefault()
    // SETUP
    Game game;
    Board board = game.getBoard();
-   vector<vector<Square>&> squares = board.squares;
+   vector<vector<Square*>> squares = board.squares;
 
    // EXERCISE
 
@@ -41,11 +41,11 @@ void TestGame::testInitDefault()
    {
       int row = i / 8;
       int col = i % 8;
-      Square square = squares[row][col];
-      assert(square.getNotation() == (rows[row] + to_string(col + 1)));	// Correct notation.
-      assert(square.getPiece() == nullptr);								      // No piece.
+      Square* square = squares[row][col];
+      assert(square->getNotation() == (rows[row] + to_string(col + 1)));	// Correct notation.
+      assert(square->getPiece() == nullptr);								         // No piece.
       bool isOddSquare = i % 2;
-      assert(square.getIsDark() == !isOddSquare);							   // Correct color.
+      assert(square.getIsDark() == !isOddSquare);							      // Correct color.
    }
 
    assert(game.playerCount == 2);						   // 2 players.

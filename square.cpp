@@ -74,3 +74,16 @@ Square& Square::getDown(Direction direction)  {
 //
 //std::string Square::getNotation()  {
 //}
+
+
+bool Square::operator!=(const nullptr_t& rhs) const
+{
+    if (piece != rhs)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

@@ -101,13 +101,16 @@
     <ClCompile Include="board.cpp" />
     <ClCompile Include="chess.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="King.cpp" />
     <ClCompile Include="move.cpp" />
     <ClCompile Include="pawn.cpp" />
     <ClCompile Include="piece.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="queen.cpp" />
+    <ClCompile Include="rook.cpp" />
     <ClCompile Include="square.cpp" />
     <ClCompile Include="testGame.cpp" />
+    <ClCompile Include="testKing.cpp" />
     <ClCompile Include="testPawn.cpp" />
     <ClCompile Include="testRunner.cpp" />
     <ClCompile Include="uiDraw.cpp" />
@@ -116,13 +119,16 @@
   <ItemGroup>
     <ClInclude Include="board.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="King.h" />
     <ClInclude Include="move.h" />
     <ClInclude Include="pawn.h" />
     <ClInclude Include="piece.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="queen.h" />
+    <ClInclude Include="rook.h" />
     <ClInclude Include="square.h" />
     <ClInclude Include="testGame.h" />
+    <ClInclude Include="testKing.h" />
     <ClInclude Include="testPawn.h" />
     <ClInclude Include="testRunner.h" />
     <ClInclude Include="uiDraw.h" />
