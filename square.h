@@ -22,6 +22,8 @@ public:
     Square& getUp();
     Square& getDown();
     std::string getNotation();
+    bool operator != (const nullptr_t& rhs) const;
+    
 };
 
 

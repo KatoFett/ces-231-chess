@@ -61,24 +61,24 @@ set<Square> King::getCastleMoves()
 	{
 		// Check left rook.
 		Square rookSquare = square.getLeft();
-		while (rookSquare != NULL && rookSquare.getPiece() == NULL)
+		while (rookSquare != nullptr && rookSquare.getPiece() == NULL)
 		{
 			rookSquare = square.getLeft();
 		}
 
-		if (rookSquare != NULL && rookSquare.getPiece() == rook && !rook.getHasMoved())
+		if (rookSquare != nullptr && rookSquare.getPiece() == rook && !rook.getHasMoved())
 		{
 			moves.insert(rookSquare);
 		}
 
 		// Check right rook.
 		rookSquare = square.getRight();
-		while (rookSquare != NULL && rookSquare.getPiece() == NULL)
+		while (rookSquare != nullptr && rookSquare.getPiece() == NULL)
 		{
 			rookSquare = square.getRight();
 		}
 
-		if (rookSquare != NULL && rookSquare.getPiece() == rook && !rook.getHasMoved())
+		if (rookSquare != nullptr && rookSquare.getPiece() == rook && !rook.getHasMoved())
 		{
 			moves.insert(rookSquare);
 		}

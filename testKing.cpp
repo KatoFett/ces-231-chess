@@ -52,7 +52,7 @@ void testKing::testKingPieceinFront()
 
 
 	//Verify
-	assert(moves.size() == 0);
+	assert(moves.size() == 4);
 
 
 	//Tear down
@@ -65,7 +65,24 @@ void testKing::testKingGetCastelMoves()
 
 void testKing::testKingMove()
 {
+	//Set Up
+	Game game;
+	game.initDefault(false);
+	Board board = game.getBoard();
+	Player player = game.getPlayer(0);
 
+
+	King king(board["D2", player]);
+
+	//Exercise
+	set<Square> moves = king.getMoves();
+
+
+	//Verify
+	assert(moves.size() == 8);
+
+
+	//Tear down
 }
 
 void testKing::testKingPieceGetMoves()
