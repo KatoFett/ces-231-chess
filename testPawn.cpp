@@ -98,7 +98,7 @@ class TestPawn {
 		Pawn blackPawn(board["c3", player2]);
 
 		//Exercise
-		vector<Square> moves = pawn.getMoves();
+		set<Square> moves = pawn.getMoves();
 
 
 		//Verify
@@ -123,10 +123,10 @@ class TestPawn {
 		Board board = game.getBoard();
 		Player player = game.getPlayer(0);
 		Pawn pawn(board["c8", player]);
-		Queen queen;
+		Queen queen(pawn.getSquare(), player);
 		//Exercise
 
-		pawn.promote(queen);
+		pawn.promote(&queen);
 
 		//Verify
 		assert(queen.getSquare().getNotation() == "c8");
@@ -155,7 +155,7 @@ class TestPawn {
 		Pawn blackPawn(board["c4", player2]);
 
 		//Exercise
-		vector<Square> moves = pawn.getMoves();
+		set<Square> moves = pawn.getMoves();
 
 
 		//Verify
@@ -182,7 +182,7 @@ class TestPawn {
 		Pawn pawn(board["c2", player]);
 
 		//Exercise
-		vector<Square> moves = pawn.getMoves();
+		set<Square> moves = pawn.getMoves();
 
 
 		//Verify

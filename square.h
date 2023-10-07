@@ -8,6 +8,7 @@ private:
     int col;
     Piece* piece;
     bool isDark;
+    
 
 public:
     Square();
@@ -15,12 +16,12 @@ public:
     int getRow();
     int getCol();
     Piece* getPiece();
-    void setPiece(Piece* newPiece);
+    void setPiece(Piece& newPiece);
     bool getIsDark();
-    Square& getLeft();
-    Square& getRight();
-    Square& getUp();
-    Square& getDown();
+    Square& getLeft(Direction direction);
+    Square& getRight(Direction direction);
+    Square& getUp(Direction direction);
+    Square& getDown(Direction direction);
     std::string getNotation();
 };
 

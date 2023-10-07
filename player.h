@@ -11,11 +11,11 @@ public:
 	Player();
 	Player(Direction direction, int color[3]);
 	int getColor();
-	void addPiece(Piece piece);
+	void addPiece(Piece& piece);
 	void removePiece(Piece& piece);
 };
 
-enum class Direction {
+enum Direction {
 	UP,
 	DOWN,
 	LEFT,

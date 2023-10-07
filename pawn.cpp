@@ -12,10 +12,10 @@ using namespace std;
 
 bool Pawn::checkEnPassant(Square enPassantSquare) {
 	Piece* piece = enPassantSquare.getPiece();
-	if (piece != nullptr && piece == Pawn)
+	if (piece != nullptr && piece.name == Pawn.NAME)
 	{
 			Player piecePlayer = piece->getPlayer();
-				if (piecePlayer != nullptr && piecePlayer != player) {
+				if (piecePlayer != player) {
 					Move lastMove = Game.getInstance().getLastMoveFromPlayer(piecePlayer);
 					if (lastMove != NULL && square.getUp().getUp() == lastMove.getFrom()) {
 						return true;
@@ -62,12 +62,7 @@ set<Square> Pawn::getMoves() {
 	return moves;
 }
 
-Piece* Pawn::promote(Piece* toPiece) {
-	if (toPiece == nullptr) {
-		// Handle the error condition (e.g., throw an exception).
-		throw std::invalid_argument("Invalid 'toPiece'");
-	}
-
+Piece Pawn::promote(Piece& toPiece) {
 	Player player;
 	player.removePiece(toPiece);
 	player.addPiece(toPiece);

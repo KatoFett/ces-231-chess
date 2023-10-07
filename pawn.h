@@ -11,7 +11,7 @@ class Pawn : public Piece
 
 public:
 	/*int getRank();*/
-	Piece* promote(Piece* toPiece);
+	Piece promote(Piece& toPiece);
 	std::set<Square> getMoves();
 	Square getEnPassantMove();
 	bool checkEnPassant(Square enPassantSquare);

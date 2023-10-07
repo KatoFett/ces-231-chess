@@ -10,7 +10,7 @@ int Player::getColor() {
 }
 
 
-void Player::addPiece(Piece piece) {
+void Player::addPiece(Piece &piece) {
 	pieces.insert(piece);
 }
 void Player::removePiece(Piece &piece) {
