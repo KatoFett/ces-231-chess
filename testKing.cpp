@@ -2,6 +2,7 @@
 #include "square.h"
 #include "game.h"
 #include "king.h"
+#include "pawn.h"
 #include "queen.h"
 #include <cassert>
 #include <vector>
@@ -36,7 +37,25 @@ bool squaresMatch(vector<Square>& squares1, const char* squares2[], int moveLeng
 
 void testKing::testKingPieceinFront()
 {
+	//Set Up
+	Game game;
+	game.initDefault(false);
+	Board board = game.getBoard();
+	Player player = game.getPlayer(0);
 
+
+	King king(board["D1", player]);
+	Pawn Pawn(board["D2", player]);
+
+	//Exercise
+	set<Square> moves = king.getMoves();
+
+
+	//Verify
+	assert(moves.size() == 0);
+
+
+	//Tear down
 }
 
 void testKing::testKingGetCastelMoves()
