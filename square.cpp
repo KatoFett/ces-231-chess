@@ -7,68 +7,69 @@ Square::Square(int row, int col, bool isDark) : row(row), col(col), isDark(isDar
 
 }
 
-int Square::getRow() {
+int Square::getRow() const {
     return row;
 }
 
-int Square::getCol() {
+int Square::getCol() const {
     return col;
 }
 
-Piece* Square::getPiece() {
+Piece* Square::getPiece() const {
     return piece;
 }
 
-void Square::setPiece(Piece& newPiece) {
+void Square::setPiece(Piece& newPiece) const {
     piece = &newPiece;
 }
 
-bool Square::getIsDark() {
+bool Square::getIsDark() const {
     return isDark;
 }
 
-Square* Square::getLeft(Direction direction)  {
+Square* Square::getLeft(Direction direction) const {
    
 
     //Will need to be changed later to handle different board sizes
-    if (col < 0 && direction == UP) {
-        return Square(row, col -1, isDark);
+    if (col < 0 ) {
+        return &Square(row, col -1, isDark);
     }
     else { 
-        throw std::out_of_range("Out of bounds");
+        return nullptr;
     }
 }
-Square* Square::getRight(Direction direction)  {
+Square* Square::getRight(Direction direction) const {
 
 
     //Will need to be changed later to handle different board sizes
     if (col > 8) {
-        return Square(row, col + 1, isDark);
+        return &Square(row, col + 1, isDark);
     }
     else {
-        throw std::out_of_range("Out of bounds");
+        return nullptr;
     }
 
 }
-Square* Square::getUp(Direction direction) {
+Square* Square::getUp(Direction direction) const {
 
     //Will need to be changed later to handle different board sizes
+    //Direction will be added later. not needed for testcases
     if(row  > 8)
-     return Square(row + 1, col, isDark);
+     return &Square(row + 1, col, isDark);
     else {
-        throw std::out_of_range("Out of bounds");
+        return nullptr;
     }
 
 
 }
 
-Square* Square::getDown(Direction direction)  {
+Square* Square::getDown(Direction direction) const {
 
     //Will need to be changed later to handle different board sizes
     if (row > 0)
-        return  Square(row - 1, col, isDark);
+        return  &Square(row - 1, col, isDark);
     else {
-        throw std::out_of_range ("Out of bounds");
+        return nullptr;
     }
 }
 //
