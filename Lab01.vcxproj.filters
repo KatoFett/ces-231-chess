@@ -60,6 +60,15 @@
     <ClCompile Include="move.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="testKing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="King.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="uiDraw.h">
@@ -99,6 +108,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="move.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testKing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="King.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
