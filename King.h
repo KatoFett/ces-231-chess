@@ -12,8 +12,6 @@ public:
 
 	std::set<Square> getMoves();
 
-private:
-
 	std::set<Square> getCastleMoves();
 
 };

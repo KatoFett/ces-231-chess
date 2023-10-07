@@ -3,7 +3,7 @@
 #include "game.h"
 #include "king.h"
 #include "pawn.h"
-#include "queen.h"
+#include "rook.h"
 #include <cassert>
 #include <vector>
 
@@ -60,7 +60,24 @@ void testKing::testKingPieceinFront()
 
 void testKing::testKingGetCastelMoves()
 {
+	//Set Up
+	Game game;
+	game.initDefault(false);
+	Board board = game.getBoard();
+	Player player = game.getPlayer(0);
 
+
+	King king(board["D1", player]);
+	Rook rook(board["A1", player]);
+
+	//Exercise
+	set<Square> moves = king.getCastleMoves();
+
+
+	//Verify
+	assert(king.getHasMoved() == false);
+	assert(rook.getHasMoved() == false);
+	assert(moves.size() == 6); //5 for around the king, 1 for the castle;
 }
 
 void testKing::testKingMove()
@@ -73,6 +90,7 @@ void testKing::testKingMove()
 
 
 	King king(board["D2", player]);
+
 
 	//Exercise
 	set<Square> moves = king.getMoves();
@@ -87,5 +105,26 @@ void testKing::testKingMove()
 
 void testKing::testKingPieceGetMoves()
 {
+	//Set Up
+	Game game;
+	game.initDefault(false);
+	Board board = game.getBoard();
+	Player player = game.getPlayer(0);
 
+
+	King king(board["D1", player]);
+	Pawn pawn1(board["C1", player]);
+	Pawn pawn2(board["C2", player]);
+	Pawn pawn3(board["E2", player]);
+
+
+	//Exercise
+	set<Square> moves = king.getMoves();
+
+
+	//Verify
+	assert(moves.size() == 2);
+
+
+	//Tear down
 }

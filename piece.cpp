@@ -15,3 +15,7 @@ bool Piece::getHasMoved()  {
     return hasMoved;
 }
 
+char* Piece::getName() {
+    return name;
+}
+
