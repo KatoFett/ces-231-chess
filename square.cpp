@@ -3,30 +3,6 @@
 
 using namespace std;
 
-Square::Square(int row, int col, bool isDark) : row(row), col(col), isDark(isDark) {
-
-}
-
-int Square::getRow() const {
-    return row;
-}
-
-int Square::getCol() const {
-    return col;
-}
-
-Piece* Square::getPiece() const {
-    return piece;
-}
-
-void Square::setPiece(Piece& newPiece) const {
-    piece = &newPiece;
-}
-
-bool Square::getIsDark() const {
-    return isDark;
-}
-
 Square* Square::getLeft(Direction direction) const {
    
 
