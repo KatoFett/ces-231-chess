@@ -10,10 +10,12 @@ class Pawn : public Piece
 
 
 public:
+	static const char* NAME;
+
 	/*int getRank();*/
-	Piece promote(Piece& toPiece);
+	void promote(Piece& toPiece);
 	std::set<Square> getMoves();
 	Square getEnPassantMove();
-	bool checkEnPassant(Square enPassantSquare);
-
+	bool checkEnPassant(Square& enPassantSquare);
+	const char* getName() const override { return NAME; }
 };

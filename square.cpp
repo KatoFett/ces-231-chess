@@ -27,7 +27,7 @@ bool Square::getIsDark() {
     return isDark;
 }
 
-Square& Square::getLeft(Direction direction)  {
+Square* Square::getLeft(Direction direction)  {
    
 
     //Will need to be changed later to handle different board sizes
@@ -38,7 +38,7 @@ Square& Square::getLeft(Direction direction)  {
         throw std::out_of_range("Out of bounds");
     }
 }
-Square& Square::getRight(Direction direction)  {
+Square* Square::getRight(Direction direction)  {
 
 
     //Will need to be changed later to handle different board sizes
@@ -50,7 +50,7 @@ Square& Square::getRight(Direction direction)  {
     }
 
 }
-Square& Square::getUp(Direction direction) {
+Square* Square::getUp(Direction direction) {
 
     //Will need to be changed later to handle different board sizes
     if(row  > 8)
@@ -62,7 +62,7 @@ Square& Square::getUp(Direction direction) {
 
 }
 
-Square& Square::getDown(Direction direction)  {
+Square* Square::getDown(Direction direction)  {
 
     //Will need to be changed later to handle different board sizes
     if (row > 0)

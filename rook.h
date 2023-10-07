@@ -9,9 +9,11 @@ using namespace std;
 class Rook : public Piece
 {
 public:
-	set<Square> getMoves();
 
-	set<Square> getRookMoves(Square square);
+   static const char* NAME;
 
+   const char* getName() const override { return NAME; }
+   set<Square> getMoves() const override;
+   static set<Square> getRookMoves(Square& square);
 };
 

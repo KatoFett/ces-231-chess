@@ -19,5 +19,5 @@ public:
    {}
 
    void addSquare(int row, Square* square);
-
+   Square* getSquare(int row, int col);
 };

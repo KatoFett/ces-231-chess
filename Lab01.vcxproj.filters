@@ -48,9 +48,6 @@
     <ClCompile Include="pawn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="piece.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="testPawn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,7 +60,7 @@
     <ClCompile Include="testKing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="King.cpp">
+    <ClCompile Include="king.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rook.cpp">
@@ -113,7 +110,7 @@
     <ClInclude Include="testKing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="King.h">
+    <ClInclude Include="king.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rook.h">
