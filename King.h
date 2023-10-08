@@ -1,17 +1,23 @@
 #pragma once
+
 #include "piece.h"
-#include "square.h"
-#include <iostream>
 #include <set>
 
 using namespace std;
 
+class Square;
+
 class King : public Piece
 {
 public:
+
+   King(Square& square, Player& player)
+      : Piece(square, player)
+   {}
+
    static const char* NAME;
 
-   std::set<Square> getMoves();
-   std::set<Square> getCastleMoves();
+   set<Square> getMoves() const override;
+   set<Square> getCastleMoves() const;
    const char* getName() const override { return NAME; }
 };

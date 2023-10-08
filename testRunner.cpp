@@ -1,14 +1,16 @@
 #include "testRunner.h"
 #include "testPawn.h"
 #include "testGame.h"
+#include "testKing.h"
 #include <iostream>
 
 using namespace std;
 
 void TestRunner::run()
 {
-	testPawn();
 	testGame();
+	testPawn();
+	testKing();
 	cout << "All tests pass.";
 }
 
@@ -21,5 +23,11 @@ void TestRunner::testPawn()
 void TestRunner::testGame()
 {
 	TestGame test;
+	test.run();
+}
+
+void TestRunner::testKing()
+{
+	TestKing test;
 	test.run();
 }

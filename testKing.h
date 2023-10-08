@@ -1,9 +1,14 @@
 #pragma once
-class testKing
+
+class TestKing
 {
-	void testKingPieceinFront();
-	void testKingGetCastelMoves();
-	void testKingMove();
-	void testKingPieceGetMoves();
+public:
+   void run();
+
+private:
+   void testKingInFront();
+   void testKingGetCastleMoves();
+   void testKingMove();
+   void testKingGetMoves();
 };
 

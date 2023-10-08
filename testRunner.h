@@ -1,12 +1,14 @@
 #pragma once
+
 class TestRunner
 {
 public:
-	void run();
+   void run();
 
 private:
 
-	void testPawn();
-	void testGame();
+   void testPawn();
+   void testGame();
+   void testKing();
 };
 

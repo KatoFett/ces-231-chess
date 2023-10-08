@@ -1,11 +1,19 @@
 #include "game.h"
+#include "player.h"
+#include "square.h"
+#include "piece.h"
+
+Game* Game::instance;
 
 void Game::initDefault(bool assignPieces)
 {
    if (assignPieces) throw "Assign pieces not implemented yet.";
 
+   int whiteColor[] = { 255, 255, 255 };
+   int blackColor[] = { 0, 0, 0 };
+
    // Create 2 players.
-   Player white, black;
+   Player white(Direction::UP, whiteColor), black(Direction::DOWN, blackColor);
    addPlayer(white);
    addPlayer(black);
 
@@ -16,7 +24,7 @@ void Game::initDefault(bool assignPieces)
       for (int col = 0; col < 8; col++)
       {
          Square square(row, col, isDark);
-         board.addSquare(row, square);
+         board.addSquare(row, &square);
          isDark = !isDark;
       }
    }
@@ -29,4 +37,16 @@ void Game::addPlayer(Player& player)
 
    if (currentTurn == nullptr)
       currentTurn = &player;
+}
+
+Move* Game::getLastMoveFromPlayer(Player& player) const
+{
+   return nullptr;
+}
+
+void Game::move(Square& square)
+{
+   if (selectedPiece == nullptr) throw "Cannot move without first selecting a piece.";
+
+   selectedPiece->moveToSquare(square);
 }

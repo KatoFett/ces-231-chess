@@ -2,6 +2,7 @@
 #include "square.h"
 #include "game.h"
 #include "king.h"
+#include "player.h"
 #include "pawn.h"
 #include "rook.h"
 #include <cassert>
@@ -9,33 +10,15 @@
 
 using namespace std;
 
-bool containsSquare(vector<Square>& squares, const char* square) {
-	for (Square& element : squares) {
-		if (element.getNotation() == square) {
-			return true;
-		}
-	}
-
-	return false;
+void TestKing::run()
+{
+	testKingInFront();
+	testKingGetCastleMoves();
+	testKingGetCastleMoves();
+	testKingGetMoves();
 }
 
-bool squaresMatch(vector<Square>& squares1, const char* squares2[], int moveLength) {
-	if (squares1.size() != moveLength) {
-		return false;
-	}
-
-	for (int i = 0; i < moveLength; i++)
-	{
-		if (!containsSquare(squares1, squares2[i])) {
-			return false;
-		}
-	}
-
-	return true;
-}
-
-
-void testKing::testKingPieceinFront()
+void TestKing::testKingInFront()
 {
 	//Set Up
 	Game game;
@@ -44,8 +27,8 @@ void testKing::testKingPieceinFront()
 	Player player = game.getPlayer(0);
 
 
-	King king(board["D1", player]);
-	Pawn Pawn(board["D2", player]);
+	King king(*board["d1"], player);
+	Pawn Pawn(*board["d2"], player);
 
 	//Exercise
 	set<Square> moves = king.getMoves();
@@ -58,7 +41,7 @@ void testKing::testKingPieceinFront()
 	//Tear down
 }
 
-void testKing::testKingGetCastelMoves()
+void TestKing::testKingGetCastleMoves()
 {
 	//Set Up
 	Game game;
@@ -67,8 +50,8 @@ void testKing::testKingGetCastelMoves()
 	Player player = game.getPlayer(0);
 
 
-	King king(board["D1", player]);
-	Rook rook(board["A1", player]);
+	King king(*board["d1"], player);
+	Rook rook(*board["a1"], player);
 
 	//Exercise
 	set<Square> moves = king.getCastleMoves();
@@ -80,7 +63,7 @@ void testKing::testKingGetCastelMoves()
 	assert(moves.size() == 6); //5 for around the king, 1 for the castle;
 }
 
-void testKing::testKingMove()
+void TestKing::testKingMove()
 {
 	//Set Up
 	Game game;
@@ -89,7 +72,7 @@ void testKing::testKingMove()
 	Player player = game.getPlayer(0);
 
 
-	King king(board["D2", player]);
+	King king(*board["d2"], player);
 
 
 	//Exercise
@@ -103,7 +86,7 @@ void testKing::testKingMove()
 	//Tear down
 }
 
-void testKing::testKingPieceGetMoves()
+void TestKing::testKingGetMoves()
 {
 	//Set Up
 	Game game;
@@ -112,10 +95,10 @@ void testKing::testKingPieceGetMoves()
 	Player player = game.getPlayer(0);
 
 
-	King king(board["D1", player]);
-	Pawn pawn1(board["C1", player]);
-	Pawn pawn2(board["C2", player]);
-	Pawn pawn3(board["E2", player]);
+	King king(*board["d1"], player);
+	Pawn pawn1(*board["c1"], player);
+	Pawn pawn2(*board["c2"], player);
+	Pawn pawn3(*board["e2"], player);
 
 
 	//Exercise

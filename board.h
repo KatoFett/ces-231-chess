@@ -1,10 +1,11 @@
 #pragma once
 
 #include "testGame.h"
-#include "square.h"
 #include <vector>
 
 using namespace std;
+
+class Square;
 
 class Board
 {
@@ -12,12 +13,15 @@ class Board
 
 private:
    vector<vector<Square*>> squares;
+   int squareCount;
 
 public:
    Board() :
-      squares()
+      squares(), squareCount(0)
    {}
 
+   Square* operator [](const char* notation) const;
+
    void addSquare(int row, Square* square);
-   Square* getSquare(int row, int col);
+   Square* getSquare(int row, int col) const;
 };

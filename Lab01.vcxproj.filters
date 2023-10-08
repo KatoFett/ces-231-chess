@@ -66,6 +66,12 @@
     <ClCompile Include="rook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="piece.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="uiDraw.h">
@@ -114,6 +120,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="direction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

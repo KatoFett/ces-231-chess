@@ -1,14 +1,19 @@
 #pragma once
+
 #include "piece.h"
-#include "square.h"
-#include <iostream>
 #include <set>
 
 using namespace std;
 
+class Square;
+class Player;
+
 class Rook : public Piece
 {
 public:
+   Rook(Square& square, Player& player)
+      : Piece(square, player)
+   {}
 
    static const char* NAME;
 

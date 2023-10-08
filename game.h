@@ -1,8 +1,12 @@
 #pragma once
 
+#include <vector>
 #include "board.h"
-#include "testGame.h"
+#include "move.h"
 #include "player.h"
+
+class TestGame;
+class Piece;
 
 class Game
 {
@@ -11,10 +15,12 @@ class Game
 private:
    Board board;
    int playerCount;
-   vector<Player&> players;
+   vector<Player> players;
    Player* currentTurn;
+   vector<Move> moves;
+   Piece* selectedPiece;
 
-   static Game& instance;
+   static Game* instance;
 
    void addPlayer(Player& player);
 
@@ -23,16 +29,23 @@ public:
       board(),
       playerCount(0),
       players(),
-      currentTurn(nullptr)
+      currentTurn(nullptr),
+      selectedPiece(nullptr),
+      moves()
    {
-      instance = *this;
+      instance = this;
    }
 
-   static Game& getInstance() { return instance; }
+   static Game getInstance() { return *instance; }
    Board& getBoard() { return board; }
    Player& getCurrentTurn() const { return *currentTurn; }
+   Player& getPlayer(int index) { return players[index]; }
    Move* getLastMoveFromPlayer(Player& player) const;
 
+   void setSelectedPiece(Piece* piece) { selectedPiece = piece; }
+
    void initDefault(bool assignPieces);
+
+   void move(Square& square);
 };
 

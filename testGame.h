@@ -1,10 +1,11 @@
 #pragma once
+
 class TestGame
 {
 public:
-	void run();
+   void run();
 
 private:
-	void testInitDefault();
+   void testInitDefault();
 };
 

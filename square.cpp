@@ -1,66 +1,103 @@
 #include "square.h"
+#include "game.h"
+#include "board.h"
+#include "direction.h"
 #include <stdexcept>
 
 using namespace std;
 
-Square* Square::getLeft(Direction direction) const {
-   
-
-    //Will need to be changed later to handle different board sizes
-    if (col < 0 ) {
-        return &Square(row, col -1, isDark);
-    }
-    else { 
-        return nullptr;
-    }
-}
-Square* Square::getRight(Direction direction) const {
-
-
-    //Will need to be changed later to handle different board sizes
-    if (col > 8) {
-        return &Square(row, col + 1, isDark);
-    }
-    else {
-        return nullptr;
-    }
-
-}
-Square* Square::getUp(Direction direction) const {
-
-    //Will need to be changed later to handle different board sizes
-    //Direction will be added later. not needed for testcases
-    if(row  > 8)
-     return &Square(row + 1, col, isDark);
-    else {
-        return nullptr;
-    }
-
-
-}
-
-Square* Square::getDown(Direction direction) const {
-
-    //Will need to be changed later to handle different board sizes
-    if (row > 0)
-        return  &Square(row - 1, col, isDark);
-    else {
-        return nullptr;
-    }
-}
-//
-//std::string Square::getNotation()  {
-//}
-
-
-bool Square::operator!=(const nullptr_t& rhs) const
+Square* Square::getLeft(Direction direction) const
 {
-    if (piece != rhs)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+   int newCol = col, newRow = row;
+   switch (direction)
+   {
+   case UP:
+      newCol--;
+      break;
+   case DOWN:
+      newCol++;
+      break;
+   case RIGHT:
+      newRow++;
+      break;
+   case LEFT:
+      newRow--;
+      break;
+   default:
+      throw "Invalid direction.";
+   }
+
+   return Game::getInstance().getBoard().getSquare(newCol, newRow);
+}
+
+Square* Square::getRight(Direction direction) const
+{
+   int newCol = col, newRow = row;
+   switch (direction)
+   {
+   case UP:
+      newCol++;
+      break;
+   case DOWN:
+      newCol--;
+      break;
+   case RIGHT:
+      newRow--;
+      break;
+   case LEFT:
+      newRow++;
+      break;
+   default:
+      throw "Invalid direction.";
+   }
+
+   return Game::getInstance().getBoard().getSquare(newCol, newRow);
+}
+
+Square* Square::getUp(Direction direction) const
+{
+   int newCol = col, newRow = row;
+   switch (direction)
+   {
+   case UP:
+      newRow++;
+      break;
+   case DOWN:
+      newRow--;
+      break;
+   case RIGHT:
+      newCol++;
+      break;
+   case LEFT:
+      newCol--;
+      break;
+   default:
+      throw "Invalid direction.";
+   }
+
+   return Game::getInstance().getBoard().getSquare(newCol, newRow);
+}
+
+Square* Square::getDown(Direction direction) const
+{
+   int newCol = col, newRow = row;
+   switch (direction)
+   {
+   case UP:
+      newRow--;
+      break;
+   case DOWN:
+      newRow++;
+      break;
+   case RIGHT:
+      newCol--;
+      break;
+   case LEFT:
+      newCol++;
+      break;
+   default:
+      throw "Invalid direction.";
+   }
+
+   return Game::getInstance().getBoard().getSquare(newCol, newRow);
 }

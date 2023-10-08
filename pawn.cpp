@@ -5,15 +5,19 @@
 #include "piece.h"
 #include "square.h"
 #include "iostream"
+#include "player.h"
+#include "direction.h"
 #include <set>
 
 using namespace std;
 
 const char* Pawn::NAME = "PAWN";
 
-bool Pawn::checkEnPassant(Square& enPassantSquare)
+bool Pawn::checkEnPassant(Square* enPassantSquare) const
 {
-   Piece* piece = enPassantSquare.getPiece();
+   if (enPassantSquare == nullptr) return false;
+
+   Piece* piece = enPassantSquare->getPiece();
    if (piece != nullptr && piece->getName() == Pawn::NAME)
    {
       Player piecePlayer = piece->getPlayer();
@@ -26,11 +30,11 @@ bool Pawn::checkEnPassant(Square& enPassantSquare)
             return true;
          }
       }
-      return false;
    }
+   return false;
 }
 
-Square Pawn::getEnPassantMove()
+Square* Pawn::getEnPassantMove() const
 {
    // There *shouldn’t* be a case where multiple en-passant moves are possible, 
    // especially in 2 - player chess.
@@ -39,16 +43,16 @@ Square Pawn::getEnPassantMove()
    Direction direction = player.getDirection();
 
    // Check Left
-   Square enPassantSquare = *square.getLeft(direction);
+   Square* enPassantSquare = square.getLeft(direction);
    if (checkEnPassant(enPassantSquare))
       return enPassantSquare;
 
    // Check Right
-   Square enPassantSquare = *square.getRight(direction);
+   enPassantSquare = square.getRight(direction);
    if (checkEnPassant(enPassantSquare))
       return enPassantSquare;
 
-
+   return nullptr;
 }
 
 //int Pawn::getRank() {
@@ -56,7 +60,7 @@ Square Pawn::getEnPassantMove()
 //	/*if(game.initDefault(false))*/
 //	return square.getCol();
 //}
-set<Square> Pawn::getMoves()
+set<Square> Pawn::getMoves() const
 {
    Direction direction = player.getDirection();
 
@@ -71,10 +75,12 @@ set<Square> Pawn::getMoves()
    return moves;
 }
 
-void Pawn::promote(Piece& toPiece)
+void Pawn::promote(Piece* toPiece)
 {
+   if (toPiece == nullptr) throw "Cannot promote to null piece.";
+
    player.removePiece(toPiece);
    player.addPiece(toPiece);
-   square.setPiece(&toPiece);
+   square.setPiece(toPiece);
    delete this;
 }

@@ -1,5 +1,8 @@
 #include "testGame.h"
 #include "game.h"
+#include "board.h"
+#include "square.h"
+#include "player.h"
 #include <vector>
 #include <cassert>
 #include <string>
@@ -20,7 +23,6 @@ void TestGame::testInitDefault()
    // SETUP
    Game game;
    Board board = game.getBoard();
-   vector<vector<Square*>> squares = board.squares;
 
    // EXERCISE
 
@@ -28,10 +30,10 @@ void TestGame::testInitDefault()
 
    // VERIFY
    // Board must be 8x8.
-   assert(squares.size() == 8);			   // 8 rows.
+   assert(board.squares.size() == 8);			   // 8 rows.
    for (int i = 0; i < 8; i++)
    {
-      assert(squares[i].size() == 8);		// 8 columns.
+      assert(board.squares[i].size() == 8);		// 8 columns.
    }
 
    char* rows[] = { "a", "b", "c", "d", "e", "f", "g", "h" };
@@ -41,11 +43,11 @@ void TestGame::testInitDefault()
    {
       int row = i / 8;
       int col = i % 8;
-      Square* square = squares[row][col];
+      Square* square = board.squares[row][col];
       assert(square->getNotation() == (rows[row] + to_string(col + 1)));	// Correct notation.
       assert(square->getPiece() == nullptr);								         // No piece.
       bool isOddSquare = i % 2;
-      assert(square.getIsDark() == !isOddSquare);							      // Correct color.
+      assert(square->getIsDark() == !isOddSquare);							      // Correct color.
    }
 
    assert(game.playerCount == 2);						   // 2 players.

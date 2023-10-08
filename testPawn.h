@@ -1,10 +1,14 @@
 #pragma once
 
-class testPawn {
-	void testgetEnEnpassantMove();
-	void testPawnPieceinFront();
-	void testPromtePromote();
-	void testPawnOneMove();
-	void testPawnPieceGetMoves();
+class TestPawn
+{
+public:
+   void run();
 
+private:
+   void testGetEnEnpassantMove();
+   void testPawnInFront();
+   void testPawnPromote();
+   void testPawnOneMove();
+   void testPawnGetMoves();
 };

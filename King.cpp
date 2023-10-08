@@ -1,14 +1,14 @@
-#include <iostream>
 #include "king.h"
 #include "square.h"
 #include "game.h"
 #include "move.h"
 #include "rook.h"
+#include "player.h"
 #include <set>
 
 const char* King::NAME = "KING";
 
-set<Square> King::getMoves()
+set<Square> King::getMoves() const
 {
 	/*
 		{-1,  1}, {0,  1},  {1,  1},
@@ -51,7 +51,7 @@ set<Square> King::getMoves()
 	return moves;
 }
 
-set<Square> King::getCastleMoves()
+set<Square> King::getCastleMoves() const
 {
 	set<Square> moves;
 	Direction direction = player.getDirection();
@@ -81,8 +81,8 @@ set<Square> King::getCastleMoves()
 		{
 			moves.insert(*rookSquare);
 		}
-
-		return moves;
 	}
+
+	return moves;
 }
 
