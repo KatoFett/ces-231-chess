@@ -24,9 +24,9 @@ void TestPawn::testGetEnEnpassantMove()
    //Set Up
    Game game;
    game.initDefault(false);
-   Board board = game.getBoard();
-   Player player1 = game.getPlayer(0);
-   Player player2 = game.getPlayer(1);
+   Board& board = game.getBoard();
+   Player& player1 = game.getPlayer(0);
+   Player& player2 = game.getPlayer(1);
 
    Pawn pawnWhite1(*board["c4"], player1);
    Pawn pawnBlack1(*board["d6"], player2);
@@ -64,7 +64,7 @@ void TestPawn::testPawnInFront()
    Pawn blackPawn(*board["c3"], player2);
 
    //Exercise
-   set<Square> moves = pawn.getMoves();
+   set<Square*> moves = pawn.getMoves();
 
 
    //Verify
@@ -104,7 +104,7 @@ void TestPawn::testPawnOneMove()
    Pawn blackPawn(*board["c4"], player2);
 
    //Exercise
-   set<Square> moves = pawn.getMoves();
+   set<Square*> moves = pawn.getMoves();
 
 
    //Verify
@@ -124,7 +124,7 @@ void TestPawn::testPawnGetMoves()
    Pawn pawn(*board["c2"], player);
 
    //Exercise
-   set<Square> moves = pawn.getMoves();
+   set<Square*> moves = pawn.getMoves();
 
 
    //Verify

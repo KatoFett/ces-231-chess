@@ -60,17 +60,17 @@ Square* Pawn::getEnPassantMove() const
 //	/*if(game.initDefault(false))*/
 //	return square.getCol();
 //}
-set<Square> Pawn::getMoves() const
+set<Square*> Pawn::getMoves() const
 {
    Direction direction = player.getDirection();
 
-   std::set<Square> moves;
-   Square oneAhead = *square.getUp(direction);
+   std::set<Square*> moves;
+   Square* oneAhead = square.getUp(direction);
 
-   if (oneAhead.getPiece() == nullptr)
+   if (oneAhead->getPiece() == nullptr)
       moves.insert(oneAhead);
-   if (oneAhead.getUp(direction)->getPiece() == nullptr && !hasMoved)
-      moves.insert(*oneAhead.getUp(direction));
+   if (oneAhead->getUp(direction)->getPiece() == nullptr && !hasMoved)
+      moves.insert(oneAhead->getUp(direction));
 
    return moves;
 }

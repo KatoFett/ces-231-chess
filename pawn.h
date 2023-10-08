@@ -18,7 +18,7 @@ public:
 
 	/*int getRank();*/
 	void promote(Piece* toPiece);
-	std::set<Square> getMoves() const override;
+	std::set<Square*> getMoves() const override;
 	Square* getEnPassantMove() const;
 	bool checkEnPassant(Square* enPassantSquare) const;
 	const char* getName() const override { return NAME; }

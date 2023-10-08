@@ -24,7 +24,7 @@ public:
    Player& getPlayer() const { return player; }
    bool getHasMoved() const { return hasMoved; }
    virtual const char* getName() const = 0;
-   virtual set<Square> getMoves() const = 0;
+   virtual set<Square*> getMoves() const = 0;
 
    void setHasMoved() { hasMoved = true; }
    void moveToSquare(Square& square);

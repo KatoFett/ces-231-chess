@@ -3,8 +3,16 @@
 #include "board.h"
 #include "direction.h"
 #include <stdexcept>
+#include <string>
 
 using namespace std;
+
+string Square::getNotation() const
+{
+   char colLetter = 97 + col;
+   char rankNum = 49 + row;
+   return string({ colLetter, rankNum });
+}
 
 Square* Square::getLeft(Direction direction) const
 {

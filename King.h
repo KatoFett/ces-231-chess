@@ -17,7 +17,7 @@ public:
 
    static const char* NAME;
 
-   set<Square> getMoves() const override;
-   set<Square> getCastleMoves() const;
+   set<Square*> getMoves() const override;
+   set<Square*> getCastleMoves() const;
    const char* getName() const override { return NAME; }
 };

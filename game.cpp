@@ -23,8 +23,8 @@ void Game::initDefault(bool assignPieces)
    {
       for (int col = 0; col < 8; col++)
       {
-         Square square(row, col, isDark);
-         board.addSquare(row, &square);
+         Square* square = new Square(row, col, isDark);
+         board.addSquare(row, square);
          isDark = !isDark;
       }
    }
@@ -32,7 +32,7 @@ void Game::initDefault(bool assignPieces)
 
 void Game::addPlayer(Player& player)
 {
-   players.push_back(player);
+   players.push_back(&player);
    playerCount++;
 
    if (currentTurn == nullptr)

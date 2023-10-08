@@ -6,7 +6,7 @@ using namespace std;
 
 const char* Queen::NAME = "QUEEN";
 
-set<Square> Queen::getMoves() const
+set<Square*> Queen::getMoves() const
 {
-   return set<Square>();
+   return set<Square*>();
 }

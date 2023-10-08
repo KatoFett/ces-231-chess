@@ -8,7 +8,7 @@
 
 const char* King::NAME = "KING";
 
-set<Square> King::getMoves() const
+set<Square*> King::getMoves() const
 {
 	/*
 		{-1,  1}, {0,  1},  {1,  1},
@@ -16,7 +16,7 @@ set<Square> King::getMoves() const
 		{-1, -1}, {0, -1}, {1, -1}
 	*/
 
-	set<Square> moves;
+	set<Square*> moves;
 	Direction direction = player.getDirection();
 	Square* oneAhead = square.getUp(direction);
 	Square* oneBack = square.getDown(direction);
@@ -25,35 +25,35 @@ set<Square> King::getMoves() const
 
 	//[0,1]
 	if (oneAhead != nullptr && oneAhead->getPiece() == nullptr)
-		moves.insert(*oneAhead);
+		moves.insert(oneAhead);
 	//[-1,1]
 	if (oneAhead->getLeft(direction)->getPiece() == nullptr)
-		moves.insert(*oneAhead->getLeft(direction));
+		moves.insert(oneAhead->getLeft(direction));
 	//[1,1]
 	if (oneAhead->getRight(direction)->getPiece() == nullptr)
-		moves.insert(*oneAhead->getRight(direction));
+		moves.insert(oneAhead->getRight(direction));
 	//[0,-1]
 	if (oneBack->getPiece() == nullptr)
-		moves.insert(*oneBack);
+		moves.insert(oneBack);
 	//[-1,-1]
 	if (oneBack->getLeft(direction)->getPiece() == nullptr)
-		moves.insert(*oneBack->getLeft(direction));
+		moves.insert(oneBack->getLeft(direction));
 	//[1,-1]
 	if (oneBack->getRight(direction)->getPiece() == nullptr)
-		moves.insert(*oneBack->getRight(direction));
+		moves.insert(oneBack->getRight(direction));
 	//[-1,0]
 	if (oneLeft->getPiece() == nullptr)
-		moves.insert(*oneLeft);
+		moves.insert(oneLeft);
 	//[1,0]
 	if (oneRight->getPiece() == nullptr)
-		moves.insert(*oneRight);
+		moves.insert(oneRight);
 
 	return moves;
 }
 
-set<Square> King::getCastleMoves() const
+set<Square*> King::getCastleMoves() const
 {
-	set<Square> moves;
+	set<Square*> moves;
 	Direction direction = player.getDirection();
 
 	if (!hasMoved)
@@ -67,7 +67,7 @@ set<Square> King::getCastleMoves() const
 
 		if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())
 		{
-			moves.insert(*rookSquare);
+			moves.insert(rookSquare);
 		}
 
 		// Check right rook.
@@ -79,7 +79,7 @@ set<Square> King::getCastleMoves() const
 
 		if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())
 		{
-			moves.insert(*rookSquare);
+			moves.insert(rookSquare);
 		}
 	}
 

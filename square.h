@@ -1,6 +1,9 @@
 #pragma once
 
 #include "direction.h"
+#include <string>
+
+using namespace std;
 
 class Piece;
 
@@ -31,7 +34,7 @@ public:
    int getCol() const { return col; }
    Piece* getPiece() const { return piece; }
    bool getIsDark() const { return isDark; }
-   const char* getNotation() const { return "a1"; }
+   string getNotation() const;
    Square* getLeft(Direction direction) const;
    Square* getRight(Direction direction) const;
    Square* getUp(Direction direction) const;

@@ -22,7 +22,7 @@ void TestGame::testInitDefault()
 {
    // SETUP
    Game game;
-   Board board = game.getBoard();
+   Board& board = game.getBoard();
 
    // EXERCISE
 
@@ -36,7 +36,7 @@ void TestGame::testInitDefault()
       assert(board.squares[i].size() == 8);		// 8 columns.
    }
 
-   char* rows[] = { "a", "b", "c", "d", "e", "f", "g", "h" };
+   char* cols[] = { "a", "b", "c", "d", "e", "f", "g", "h" };
 
    // Squares must be A1-H8, empty (no piece on top), and alternating color.
    for (int i = 0; i < 63; i++)
@@ -44,14 +44,17 @@ void TestGame::testInitDefault()
       int row = i / 8;
       int col = i % 8;
       Square* square = board.squares[row][col];
-      assert(square->getNotation() == (rows[row] + to_string(col + 1)));	// Correct notation.
+      auto squareNotation = square->getNotation();
+      auto expectedNotation = cols[col] + to_string(row + 1);
+      auto notationMatches = squareNotation == expectedNotation;
+      assert(notationMatches);	// Correct notation.
       assert(square->getPiece() == nullptr);								         // No piece.
       bool isOddSquare = i % 2;
       assert(square->getIsDark() == !isOddSquare);							      // Correct color.
    }
 
    assert(game.playerCount == 2);						   // 2 players.
-   assert(game.getCurrentTurn() == game.players[0]);	// Current turn is white.
+   assert(game.getCurrentTurn() == *game.players[0]);	// Current turn is white.
 
    // TEARDOWN
 }

@@ -31,7 +31,7 @@ void TestKing::testKingInFront()
 	Pawn Pawn(*board["d2"], player);
 
 	//Exercise
-	set<Square> moves = king.getMoves();
+	set<Square*> moves = king.getMoves();
 
 
 	//Verify
@@ -54,7 +54,7 @@ void TestKing::testKingGetCastleMoves()
 	Rook rook(*board["a1"], player);
 
 	//Exercise
-	set<Square> moves = king.getCastleMoves();
+	set<Square*> moves = king.getCastleMoves();
 
 
 	//Verify
@@ -76,7 +76,7 @@ void TestKing::testKingMove()
 
 
 	//Exercise
-	set<Square> moves = king.getMoves();
+	set<Square*> moves = king.getMoves();
 
 
 	//Verify
@@ -102,7 +102,7 @@ void TestKing::testKingGetMoves()
 
 
 	//Exercise
-	set<Square> moves = king.getMoves();
+	set<Square*> moves = king.getMoves();
 
 
 	//Verify
