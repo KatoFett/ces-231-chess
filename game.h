@@ -36,7 +36,12 @@ public:
       instance = this;
    }
 
-   static Game getInstance() { return *instance; }
+   ~Game()
+   {
+      instance = nullptr;
+   }
+
+   static Game& getInstance() { return *instance; }
    Board& getBoard() { return board; }
    Player& getCurrentTurn() const { return *currentTurn; }
    Player& getPlayer(int index) { return *players[index]; }
