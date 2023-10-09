@@ -17,8 +17,8 @@ void TestGame::run()
 }
 
 /* TEST INIT DEFAULT
-* Tests Game.initDefault(false) to produce an empty 8x8 chess board,
-* necessary for almost all test cases.
+* Tests Game.initDefault(false) to produce an empty 8x8 chess board.
+* Almost ALL test cases use this function.
 */
 void TestGame::testInitDefault()
 {
@@ -49,10 +49,10 @@ void TestGame::testInitDefault()
       auto squareNotation = square->getNotation();
       auto expectedNotation = cols[col] + to_string(row + 1);
       auto notationMatches = squareNotation == expectedNotation;
-      assert(notationMatches);	// Correct notation.
-      assert(square->getPiece() == nullptr);								         // No piece.
+      assert(notationMatches);	                                    // Correct notation.
+      assert(square->getPiece() == nullptr);								   // No piece.
       bool isOddSquare = i % 2;
-      assert(square->getIsDark() == !isOddSquare);							      // Correct color.
+      assert(square->getIsDark() == !isOddSquare);                   // Correct color.
    }
 
    assert(game.playerCount == 2);						   // 2 players.
@@ -87,8 +87,8 @@ void TestGame::testMovePawn()
 
    Move* move = game.moves[0];
    assert(move->getPieceMoved() == &pawn);		   // Moved piece is the pawn.
-   assert(move->getPieceCaptured() == nullptr);	   // No captured piece.
-   assert(move->getFrom() == fromSquare);		   // Correct from-square.
+   assert(move->getPieceCaptured() == nullptr);    // No captured piece.
+   assert(move->getFrom() == fromSquare);		      // Correct from-square.
    assert(move->getTo() == toSquare);			      // Correct to-square.
 
    // TEARDOWN
