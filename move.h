@@ -1,8 +1,6 @@
 #pragma once
-
 class Square;
 class Piece;
-
 class Move
 {
 private:

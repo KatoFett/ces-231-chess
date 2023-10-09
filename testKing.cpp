@@ -75,7 +75,6 @@ void TestKing::testKingMove()
 	King king(board["d2"], player);
 	string startLocation = king.getSquare()->getNotation();
 
-	game.setSelectedPiece(&king);
 
 
 	//Exercise

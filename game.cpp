@@ -42,8 +42,17 @@ void Game::addPlayer(Player& player)
 
 Move* Game::getLastMoveFromPlayer(Player& player) const
 {
-   return nullptr;
+    //I know this doesnt work for for man chess it currently only checks the last move made
+    if (moves.empty()) 
+        throw "no moves have been made.";
+    
+
+    int prev = moves.size() - 1;
+    
+    return moves[prev];
+
 }
+
 
 void Game::move(Square* square)
 {

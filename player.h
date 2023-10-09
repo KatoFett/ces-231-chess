@@ -26,6 +26,7 @@ public:
    bool operator == (Player& rhs) { return this == &rhs; }
    bool operator != (Player& rhs) { return this != &rhs; }
 
+
    Direction getDirection() const { return direction; }
    int* getColor() { return color; }
    void addPiece(Piece* piece) { pieces.insert(piece); }
