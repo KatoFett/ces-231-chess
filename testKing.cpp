@@ -14,7 +14,7 @@ void TestKing::run()
 {
 	testKingInFront();
 	testKingGetCastleMoves();
-	testKingGetCastleMoves();
+	testKingMove();
 	testKingGetMoves();
 }
 
@@ -27,15 +27,15 @@ void TestKing::testKingInFront()
 	Player player = game.getPlayer(0);
 
 
-	King king(board["d1"], player);
 	Pawn Pawn(board["d2"], player);
+	King king(board["d1"], player);
 
 	//Exercise
 	set<Square*> moves = king.getMoves();
 
 
 	//Verify
-	assert(moves.size() == 4);
+	assert(moves.size() == 4); //Pawn blocks the 5th
 
 
 	//Tear down
@@ -50,11 +50,11 @@ void TestKing::testKingGetCastleMoves()
 	Player player = game.getPlayer(0);
 
 
-	King king(board["d1"], player);
 	Rook rook(board["a1"], player);
+	King king(board["d1"], player);
 
 	//Exercise
-	set<Square*> moves = king.getCastleMoves();
+	set<Square*> moves = king.getMoves();
 
 
 	//Verify
@@ -73,14 +73,18 @@ void TestKing::testKingMove()
 
 
 	King king(board["d2"], player);
+	string startLocation = king.getSquare()->getNotation();
+
+	game.setSelectedPiece(&king);
 
 
 	//Exercise
-	set<Square*> moves = king.getMoves();
+	game.move(board["d3"]);
 
 
 	//Verify
-	assert(moves.size() == 8);
+	assert(startLocation == "d2"); //Start location.
+	assert(king.getSquare()->getNotation() == "d3"); //End location.
 
 
 	//Tear down
@@ -106,7 +110,7 @@ void TestKing::testKingGetMoves()
 
 
 	//Verify
-	assert(moves.size() == 2);
+	assert(moves.size() == 2); //Only open moves with all the pawns.
 
 
 	//Tear down

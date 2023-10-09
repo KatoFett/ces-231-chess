@@ -35,7 +35,7 @@ Square* Square::getLeft(Direction direction) const
       throw "Invalid direction.";
    }
 
-   return Game::getInstance().getBoard().getSquare(newCol, newRow);
+   return Game::getInstance().getBoard().getSquare(newRow, newCol);
 }
 
 Square* Square::getRight(Direction direction) const
@@ -59,7 +59,7 @@ Square* Square::getRight(Direction direction) const
       throw "Invalid direction.";
    }
 
-   return Game::getInstance().getBoard().getSquare(newCol, newRow);
+   return Game::getInstance().getBoard().getSquare(newRow, newCol);
 }
 
 Square* Square::getUp(Direction direction) const
@@ -83,7 +83,7 @@ Square* Square::getUp(Direction direction) const
       throw "Invalid direction.";
    }
 
-   return Game::getInstance().getBoard().getSquare(newCol, newRow);
+   return Game::getInstance().getBoard().getSquare(newRow, newCol);
 }
 
 Square* Square::getDown(Direction direction) const
@@ -107,5 +107,5 @@ Square* Square::getDown(Direction direction) const
       throw "Invalid direction.";
    }
 
-   return Game::getInstance().getBoard().getSquare(newCol, newRow);
+   return Game::getInstance().getBoard().getSquare(newRow, newCol);
 }
