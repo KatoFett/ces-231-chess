@@ -12,14 +12,14 @@ using namespace std;
 
 void TestPawn::run()
 {
-   testGetEnEnpassantMove();
+   testGetEnpassantMove();
    testPawnInFront();
    testPawnPromote();
    testPawnOneMove();
    testPawnGetMoves();
 }
 
-void TestPawn::testGetEnEnpassantMove()
+void TestPawn::testGetEnpassantMove()
 {
    //Set Up
    Game game;
@@ -45,7 +45,7 @@ void TestPawn::testGetEnEnpassantMove()
 
    //Verify
 
-   assert(square != nullptr);
+   assert(square->getPiece() == nullptr);
    assert(square->getNotation() == "b6");
 
    //Tear down

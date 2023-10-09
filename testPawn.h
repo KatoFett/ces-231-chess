@@ -6,7 +6,7 @@ public:
    void run();
 
 private:
-   void testGetEnEnpassantMove();
+   void testGetEnpassantMove();
    void testPawnInFront();
    void testPawnPromote();
    void testPawnOneMove();
