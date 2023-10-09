@@ -104,10 +104,6 @@ set<Square*> King::getCastleMoves() const
 		while (rookSquare != nullptr && rookSquare->getPiece() == nullptr)
 		{
 			rookSquare = rookSquare->getRight(direction);
-			if (rookSquare->getCol() >  6)
-			{
-				rookSquare = nullptr;
-			}
 		}
 
 		if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())
