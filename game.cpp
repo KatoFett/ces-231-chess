@@ -13,9 +13,10 @@ void Game::initDefault(bool assignPieces)
    int blackColor[] = { 0, 0, 0 };
 
    // Create 2 players.
-   Player white(Direction::UP, whiteColor), black(Direction::DOWN, blackColor);
-   addPlayer(white);
-   addPlayer(black);
+   Player* white = new Player(Direction::UP, whiteColor);
+   Player* black = new Player(Direction::DOWN, blackColor);
+   addPlayer(*white);
+   addPlayer(*black);
 
    // Create squares.
    bool isDark = true;    // A1 square is always black.

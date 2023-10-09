@@ -1,10 +1,10 @@
 #pragma once
 
 #include <set>
+#include "player.h"
 
 using namespace std;
 
-class Player;
 class Square;
 
 class Piece
