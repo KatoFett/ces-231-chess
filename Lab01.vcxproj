@@ -101,7 +101,6 @@
     <ClCompile Include="board.cpp" />
     <ClCompile Include="chess.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="king.cpp" />
     <ClCompile Include="move.cpp" />
     <ClCompile Include="pawn.cpp" />
     <ClCompile Include="piece.cpp" />
@@ -121,7 +120,6 @@
     <ClInclude Include="board.h" />
     <ClInclude Include="direction.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="king.h" />
     <ClInclude Include="move.h" />
     <ClInclude Include="pawn.h" />
     <ClInclude Include="piece.h" />
