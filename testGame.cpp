@@ -6,12 +6,14 @@
 #include <vector>
 #include <cassert>
 #include <string>
+#include "pawn.h"
 
 using namespace std;
 
 void TestGame::run()
 {
    testInitDefault();
+   testMovePawn();
 }
 
 /* TEST INIT DEFAULT
@@ -59,3 +61,35 @@ void TestGame::testInitDefault()
    // TEARDOWN
 }
 
+/* TEST MOVE PAWN
+* Tests Game.Move() with a generic pawn move.
+*/
+void TestGame::testMovePawn()
+{
+   // SETUP
+   Game game;
+   game.initDefault(false);
+   Board& board = game.getBoard();
+   Player& player = game.getCurrentTurn();
+   Square* fromSquare = board["e2"];
+   Square* toSquare = board["e4"];
+   Pawn pawn(fromSquare, player);
+   game.setSelectedPiece(&pawn);
+
+   // EXERCISE
+   game.move(toSquare);
+
+   // VERIFY
+   assert(pawn.getSquare() == toSquare);			// Moved to the square.
+   assert(fromSquare->getPiece() == nullptr);	// Old square is empty.
+   assert(toSquare->getPiece() == &pawn);			// New square contains the pawn.
+   assert(game.moves.size() == 1);					// Added new move.
+
+   Move* move = game.moves[0];
+   assert(move->getPieceMoved() == &pawn);		   // Moved piece is the pawn.
+   assert(move->getPieceCaptured() == nullptr);	   // No captured piece.
+   assert(move->getFrom() == fromSquare);		   // Correct from-square.
+   assert(move->getTo() == toSquare);			      // Correct to-square.
+
+   // TEARDOWN
+}

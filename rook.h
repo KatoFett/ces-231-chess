@@ -11,7 +11,7 @@ class Player;
 class Rook : public Piece
 {
 public:
-   Rook(Square& square, Player& player)
+   Rook(Square* square, Player& player)
       : Piece(square, player)
    {}
 

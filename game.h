@@ -51,6 +51,6 @@ public:
 
    void initDefault(bool assignPieces);
 
-   void move(Square& square);
+   void move(Square* square);
 };
 

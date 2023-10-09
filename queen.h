@@ -11,7 +11,7 @@ class Player;
 class Queen : public Piece
 {
 public:
-   Queen(Square& square, Player& player)
+   Queen(Square* square, Player& player)
       : Piece(square, player)
    {}
 

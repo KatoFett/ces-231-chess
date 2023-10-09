@@ -18,10 +18,10 @@ set<Square*> King::getMoves() const
 
 	set<Square*> moves;
 	Direction direction = player.getDirection();
-	Square* oneAhead = square.getUp(direction);
-	Square* oneBack = square.getDown(direction);
-	Square* oneLeft = square.getLeft(direction);
-	Square* oneRight = square.getRight(direction);
+	Square* oneAhead = square->getUp(direction);
+	Square* oneBack = square->getDown(direction);
+	Square* oneLeft = square->getLeft(direction);
+	Square* oneRight = square->getRight(direction);
 
 	//[0,1]
 	if (oneAhead != nullptr && oneAhead->getPiece() == nullptr)
@@ -59,10 +59,10 @@ set<Square*> King::getCastleMoves() const
 	if (!hasMoved)
 	{
 		// Check left rook.
-		Square* rookSquare = square.getLeft(direction);
+		Square* rookSquare = square->getLeft(direction);
 		while (rookSquare != nullptr && rookSquare->getPiece() == nullptr)
 		{
-			rookSquare = square.getLeft(direction);
+			rookSquare = square->getLeft(direction);
 		}
 
 		if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())
@@ -71,10 +71,10 @@ set<Square*> King::getCastleMoves() const
 		}
 
 		// Check right rook.
-		rookSquare = square.getRight(direction);
+		rookSquare = square->getRight(direction);
 		while (rookSquare != nullptr && rookSquare->getPiece() == nullptr)
 		{
-			rookSquare = square.getRight(direction);
+			rookSquare = square->getRight(direction);
 		}
 
 		if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())

@@ -1,33 +1,35 @@
 #pragma once
 
 #include <set>
-#include "player.h"
 
 using namespace std;
 
+class Player;
 class Square;
+class Move;
 
 class Piece
 {
 protected:
    Player& player;
-   Square& square;
+   Square* square;
    bool hasMoved;
 
 public:
 
-   Piece(Square& square, Player& player) :
+   Piece(Square* square, Player& player) :
       square(square), player(player), hasMoved(false)
    {}
 
-   Square& getSquare() const { return square; }
+   Square* getSquare() const { return square; }
    Player& getPlayer() const { return player; }
    bool getHasMoved() const { return hasMoved; }
    virtual const char* getName() const = 0;
    virtual set<Square*> getMoves() const = 0;
+   virtual Move* getMoveFromSquare(Square* destination);
 
    void setHasMoved() { hasMoved = true; }
-   void moveToSquare(Square& square);
+   Move* moveToSquare(Square* square);
 };
 
 

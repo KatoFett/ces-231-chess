@@ -27,8 +27,8 @@ void TestKing::testKingInFront()
 	Player player = game.getPlayer(0);
 
 
-	King king(*board["d1"], player);
-	Pawn Pawn(*board["d2"], player);
+	King king(board["d1"], player);
+	Pawn Pawn(board["d2"], player);
 
 	//Exercise
 	set<Square*> moves = king.getMoves();
@@ -50,8 +50,8 @@ void TestKing::testKingGetCastleMoves()
 	Player player = game.getPlayer(0);
 
 
-	King king(*board["d1"], player);
-	Rook rook(*board["a1"], player);
+	King king(board["d1"], player);
+	Rook rook(board["a1"], player);
 
 	//Exercise
 	set<Square*> moves = king.getCastleMoves();
@@ -72,7 +72,7 @@ void TestKing::testKingMove()
 	Player player = game.getPlayer(0);
 
 
-	King king(*board["d2"], player);
+	King king(board["d2"], player);
 
 
 	//Exercise
@@ -95,10 +95,10 @@ void TestKing::testKingGetMoves()
 	Player player = game.getPlayer(0);
 
 
-	King king(*board["d1"], player);
-	Pawn pawn1(*board["c1"], player);
-	Pawn pawn2(*board["c2"], player);
-	Pawn pawn3(*board["e2"], player);
+	King king(board["d1"], player);
+	Pawn pawn1(board["c1"], player);
+	Pawn pawn2(board["c2"], player);
+	Pawn pawn3(board["e2"], player);
 
 
 	//Exercise

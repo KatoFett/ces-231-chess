@@ -11,7 +11,7 @@ class King : public Piece
 {
 public:
 
-   King(Square& square, Player& player)
+   King(Square* square, Player& player)
       : Piece(square, player)
    {}
 

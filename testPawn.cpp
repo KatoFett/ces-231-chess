@@ -28,17 +28,17 @@ void TestPawn::testGetEnpassantMove()
    Player& player1 = game.getPlayer(0);
    Player& player2 = game.getPlayer(1);
 
-   Pawn pawnWhite1(*board["c4"], player1);
-   Pawn pawnBlack1(*board["d6"], player2);
-   Pawn pawnBlack2(*board["b7"], player2);
+   Pawn pawnWhite1(board["c4"], player1);
+   Pawn pawnBlack1(board["d6"], player2);
+   Pawn pawnBlack2(board["b7"], player2);
 
    // Set current player to black.
    game.setSelectedPiece(&pawnWhite1);
-   game.move(*board["c5"]);
+   game.move(board["c5"]);
 
    // Move black pawn.
    game.setSelectedPiece(&pawnBlack1);
-   game.move(*board["b5"]);
+   game.move(board["b5"]);
 
    //Exercise
    Square* square = pawnWhite1.getEnPassantMove();
@@ -60,8 +60,8 @@ void TestPawn::testPawnInFront()
    Player player = game.getPlayer(0);
    Player player2 = game.getPlayer(1);
 
-   Pawn pawn(*board["c2"], player);
-   Pawn blackPawn(*board["c3"], player2);
+   Pawn pawn(board["c2"], player);
+   Pawn blackPawn(board["c3"], player2);
 
    //Exercise
    set<Square*> moves = pawn.getMoves();
@@ -79,14 +79,14 @@ void TestPawn::testPawnPromote()
    game.initDefault(false);
    Board board = game.getBoard();
    Player player = game.getPlayer(0);
-   Pawn pawn(*board["c8"], player);
+   Pawn pawn(board["c8"], player);
    Queen queen(pawn.getSquare(), player);
    //Exercise
 
    pawn.promote(&queen);
 
    //Verify
-   assert(queen.getSquare().getNotation() == "c8");
+   assert(queen.getSquare()->getNotation() == "c8");
 
    //Tear down
 }
@@ -100,8 +100,8 @@ void TestPawn::testPawnOneMove()
    Player player = game.getPlayer(0);
    Player player2 = game.getPlayer(1);
 
-   Pawn pawn(*board["c2"], player);
-   Pawn blackPawn(*board["c4"], player2);
+   Pawn pawn(board["c2"], player);
+   Pawn blackPawn(board["c4"], player2);
 
    //Exercise
    set<Square*> moves = pawn.getMoves();
@@ -121,7 +121,7 @@ void TestPawn::testPawnGetMoves()
    game.initDefault(false);
    Board board = game.getBoard();
    Player player = game.getPlayer(0);
-   Pawn pawn(*board["c2"], player);
+   Pawn pawn(board["c2"], player);
 
    //Exercise
    set<Square*> moves = pawn.getMoves();

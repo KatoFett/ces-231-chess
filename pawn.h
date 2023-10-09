@@ -10,7 +10,7 @@ class Square;
 class Pawn : public Piece
 {
 public:
-	Pawn(Square& square, Player& player)
+	Pawn(Square* square, Player& player)
 		: Piece(square, player)
 	{}
 

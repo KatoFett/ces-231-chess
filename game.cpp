@@ -45,9 +45,10 @@ Move* Game::getLastMoveFromPlayer(Player& player) const
    return nullptr;
 }
 
-void Game::move(Square& square)
+void Game::move(Square* square)
 {
    if (selectedPiece == nullptr) throw "Cannot move without first selecting a piece.";
 
-   selectedPiece->moveToSquare(square);
+   Move* move = selectedPiece->moveToSquare(square);
+   moves.push_back(move);
 }
