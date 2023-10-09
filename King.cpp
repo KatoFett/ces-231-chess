@@ -49,13 +49,13 @@ set<Square*> King::getMoves() const
 	if (oneLeft != nullptr && oneLeft->getPiece() == nullptr)
 	{
 		moves.insert(oneLeft);
-		if (oneLeft->getDown(direction) != nullptr && oneLeft->getDown(direction)->getPiece() == nullptr && oneBack == nullptr)
+		if (oneLeft->getDown(direction) != nullptr && oneLeft->getDown(direction)->getPiece() == nullptr && !(oneBack != nullptr && oneBack->getPiece() == nullptr))
 		{
 			//[-1,-1]
 			moves.insert(oneLeft->getDown(direction));
 		}
 		//[-1,1]
-		if (oneLeft->getUp(direction) != nullptr && oneLeft->getUp(direction)->getPiece() == nullptr && oneAhead == nullptr)
+		if (oneLeft->getUp(direction) != nullptr && oneLeft->getUp(direction)->getPiece() == nullptr && !(oneAhead != nullptr && oneAhead->getPiece() == nullptr))
 			moves.insert(oneLeft->getUp(direction));
 	}
 	//[1,0]
@@ -63,10 +63,10 @@ set<Square*> King::getMoves() const
 	{
 		moves.insert(oneRight);
 		//[-1,-1]
-		if (oneRight->getDown(direction) != nullptr && oneRight->getDown(direction)->getPiece() == nullptr && oneBack == nullptr)
+		if (oneRight->getDown(direction) != nullptr && oneRight->getDown(direction)->getPiece() == nullptr && !(oneBack != nullptr && oneBack->getPiece() == nullptr))
 			moves.insert(oneRight->getDown(direction));
 		//[1,1]
-		if (oneRight->getUp(direction) != nullptr && oneRight->getUp(direction)->getPiece() == nullptr && oneAhead == nullptr)
+		if (oneRight->getUp(direction) != nullptr && oneRight->getUp(direction)->getPiece() == nullptr && !(oneAhead != nullptr && oneAhead->getPiece() == nullptr))
 			moves.insert(oneRight->getUp(direction));
 	}
 

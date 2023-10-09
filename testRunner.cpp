@@ -8,8 +8,8 @@ using namespace std;
 
 void TestRunner::run()
 {
-	//testGame();
-	//testPawn();
+	testGame();
+	testPawn();
 	testKing();
 	cout << "All tests pass.";
 }

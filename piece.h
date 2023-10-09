@@ -17,11 +17,7 @@ protected:
 
 public:
 
-    Piece(Square* square, Player& player) :
-        square(square), player(player), hasMoved(false)
-   {
-        this->square->setPiece(this);
-   }
+    Piece(Square* square, Player& player);
 
    Square* getSquare() const { return square; }
    Player& getPlayer() const { return player; }
