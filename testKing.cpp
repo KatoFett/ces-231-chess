@@ -23,8 +23,8 @@ void TestKing::testKingInFront()
 	//Set Up
 	Game game;
 	game.initDefault(false);
-	Board board = game.getBoard();
-	Player player = game.getPlayer(0);
+	Board& board = game.getBoard();
+	Player& player = game.getPlayer(0);
 
 
 	Pawn Pawn(board["d2"], player);
@@ -46,8 +46,8 @@ void TestKing::testKingGetCastleMoves()
 	//Set Up
 	Game game;
 	game.initDefault(false);
-	Board board = game.getBoard();
-	Player player = game.getPlayer(0);
+	Board& board = game.getBoard();
+	Player& player = game.getPlayer(0);
 
 
 	Rook rook(board["a1"], player);
@@ -68,8 +68,8 @@ void TestKing::testKingMove()
 	//Set Up
 	Game game;
 	game.initDefault(false);
-	Board board = game.getBoard();
-	Player player = game.getPlayer(0);
+	Board& board = game.getBoard();
+	Player& player = game.getPlayer(0);
 
 
 	King king(board["d2"], player);
@@ -94,8 +94,8 @@ void TestKing::testKingGetMoves()
 	//Set Up
 	Game game;
 	game.initDefault(false);
-	Board board = game.getBoard();
-	Player player = game.getPlayer(0);
+	Board& board = game.getBoard();
+	Player& player = game.getPlayer(0);
 
 
 	King king(board["d1"], player);

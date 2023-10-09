@@ -32,8 +32,8 @@ void Board::addSquare(int row, Square* square)
 
 Square* Board::getSquare(int row, int col) const
 {
-   if (row < 0 || row > squares.size()) return nullptr;
-   if (col < 0 || col > squares[row].size()) return nullptr;
+   if (row < 0 || row >= squares.size()) return nullptr;
+   if (col < 0 || col >= squares[row].size()) return nullptr;
 
    return squares[row][col];
 }

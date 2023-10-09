@@ -17,58 +17,48 @@ set<Square*> King::getMoves() const
 	*/
 
 	set<Square*> moves;
+	Board board = Game::getInstance().getBoard();
 	Direction direction = player.getDirection();
 	Square* oneAhead = square->getUp(direction);
+	Square* topLeft = board.getSquare(square->getRow() + 1, square->getCol() - 1);
+	Square* topRight = board.getSquare(square->getRow() + 1, square->getCol() + 1);
 	Square* oneBack = square->getDown(direction);
+	Square* bottomLeft = board.getSquare(square->getRow() - 1, square->getCol() - 1);
+	Square* bottomRight = board.getSquare(square->getRow() - 1, square->getCol() + 1);
 	Square* oneLeft = square->getLeft(direction);
 	Square* oneRight = square->getRight(direction);
 
 	//[0,1]
 	if (oneAhead != nullptr && oneAhead->getPiece() == nullptr)
-	{
 		moves.insert(oneAhead);
-		//[-1,1]
-		if (oneAhead->getLeft(direction) != nullptr && oneAhead->getLeft(direction)->getPiece() == nullptr)
-			moves.insert(oneAhead->getLeft(direction));
-		//[1,1]
-		if (oneAhead->getRight(direction) != nullptr && oneAhead->getRight(direction)->getPiece() == nullptr)
-			moves.insert(oneAhead->getRight(direction));
-	}
+
+	 //[-1,1]
+	 if (topLeft != nullptr && topLeft->getPiece() == nullptr)
+		  moves.insert(topLeft);
+
+	 //[1,1]
+	 if (topRight != nullptr && topRight->getPiece() == nullptr)
+		  moves.insert(topRight);
+	
 	//[0,-1]
 	if (oneBack != nullptr && oneBack->getPiece() == nullptr)
-	{
 		moves.insert(oneBack);
-		//[-1,-1]
-		if (oneBack->getLeft(direction) != nullptr && oneBack->getLeft(direction)->getPiece() == nullptr)
-			moves.insert(oneBack->getLeft(direction));
-		//[1,-1]
-		if (oneBack->getRight(direction) != nullptr && oneBack->getRight(direction)->getPiece() == nullptr)
-			moves.insert(oneBack->getRight(direction));
-	}
+	
+	 //[-1,-1]
+	 if (bottomLeft != nullptr && bottomLeft->getPiece() == nullptr)
+		  moves.insert(bottomLeft);
+
+	 //[1,-1]
+	 if (bottomRight != nullptr && bottomRight->getPiece() == nullptr)
+		  moves.insert(bottomRight);
+	
 	//[-1,0]
 	if (oneLeft != nullptr && oneLeft->getPiece() == nullptr)
-	{
 		moves.insert(oneLeft);
-		if (oneLeft->getDown(direction) != nullptr && oneLeft->getDown(direction)->getPiece() == nullptr && !(oneBack != nullptr && oneBack->getPiece() == nullptr))
-		{
-			//[-1,-1]
-			moves.insert(oneLeft->getDown(direction));
-		}
-		//[-1,1]
-		if (oneLeft->getUp(direction) != nullptr && oneLeft->getUp(direction)->getPiece() == nullptr && !(oneAhead != nullptr && oneAhead->getPiece() == nullptr))
-			moves.insert(oneLeft->getUp(direction));
-	}
+	
 	//[1,0]
 	if (oneRight != nullptr && oneRight->getPiece() == nullptr)
-	{
 		moves.insert(oneRight);
-		//[-1,-1]
-		if (oneRight->getDown(direction) != nullptr && oneRight->getDown(direction)->getPiece() == nullptr && !(oneBack != nullptr && oneBack->getPiece() == nullptr))
-			moves.insert(oneRight->getDown(direction));
-		//[1,1]
-		if (oneRight->getUp(direction) != nullptr && oneRight->getUp(direction)->getPiece() == nullptr && !(oneAhead != nullptr && oneAhead->getPiece() == nullptr))
-			moves.insert(oneRight->getUp(direction));
-	}
 
 	set<Square*> castleMoves = getCastleMoves();
 
@@ -104,10 +94,6 @@ set<Square*> King::getCastleMoves() const
 		while (rookSquare != nullptr && rookSquare->getPiece() == nullptr)
 		{
 			rookSquare = rookSquare->getRight(direction);
-			if (rookSquare->getCol() >  6)
-			{
-				rookSquare = nullptr;
-			}
 		}
 
 		if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())

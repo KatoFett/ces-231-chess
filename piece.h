@@ -17,7 +17,7 @@ protected:
 
 public:
 
-    Piece(Square* square, Player& player);
+   Piece(Square* square, Player& player);
 
    Square* getSquare() const { return square; }
    Player& getPlayer() const { return player; }

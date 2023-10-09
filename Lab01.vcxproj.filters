@@ -60,9 +60,6 @@
     <ClCompile Include="testKing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="king.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="rook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -70,6 +67,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="testHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="king.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,9 +116,6 @@
     <ClInclude Include="testKing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="king.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -126,6 +123,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="direction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="king.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

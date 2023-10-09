@@ -4,9 +4,9 @@
 #include "move.h"
 
 Piece::Piece(Square* square, Player& player) :
-square(square), player(player), hasMoved(false)
+   square(square), player(player), hasMoved(false)
 {
-    this->square->setPiece(this);
+   this->square->setPiece(this);
 }
 
 Move* Piece::moveToSquare(Square* destination)
