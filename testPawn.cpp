@@ -37,7 +37,7 @@ void TestPawn::testGetEnpassantMove()
    game.move(board["c5"]);
 
    // Move black pawn.
-   game.setSelectedPiece(&pawnBlack1);
+   game.setSelectedPiece(&pawnBlack2);
    game.move(board["b5"]);
 
    //Exercise

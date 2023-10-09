@@ -26,7 +26,7 @@ bool Pawn::checkEnPassant(Square* enPassantSquare) const
          Direction direction = player.getDirection();
          
          Move* lastMove = Game::getInstance().getLastMoveFromPlayer(piecePlayer);
-         if (lastMove != nullptr && square->getUp(direction)->getUp(direction) == lastMove->getFrom())
+         if (lastMove != nullptr && enPassantSquare->getUp(direction)->getUp(direction) == lastMove->getFrom())
          {
             return true;
          }
@@ -45,13 +45,13 @@ Square* Pawn::getEnPassantMove() const
 
    // Check Left
    Square* enPassantSquare = square->getLeft(direction);
-   if (checkEnPassant(enPassantSquare))
-      return enPassantSquare;
+   if (checkEnPassant(enPassantSquare) && enPassantSquare->getUp(direction) != nullptr)
+      return enPassantSquare->getUp(direction);
 
    // Check Right
    enPassantSquare = square->getRight(direction);
-   if (checkEnPassant(enPassantSquare))
-      return enPassantSquare;
+   if (checkEnPassant(enPassantSquare) && enPassantSquare->getUp(direction) != nullptr)
+      return enPassantSquare->getUp(direction);
 
    return nullptr;
 }

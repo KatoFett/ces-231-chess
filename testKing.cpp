@@ -71,15 +71,13 @@ void TestKing::testKingMove()
 	Board& board = game.getBoard();
 	Player& player = game.getPlayer(0);
 
-
 	King king(board["d2"], player);
 	string startLocation = king.getSquare()->getNotation();
 
-
+	game.setSelectedPiece(&king);
 
 	//Exercise
 	game.move(board["d3"]);
-
 
 	//Verify
 	assert(startLocation == "d2"); //Start location.
