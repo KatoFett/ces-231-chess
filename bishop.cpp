@@ -33,7 +33,7 @@ set<Square*> Bishop::getMoves() const
 	 while (upLeft != nullptr && upLeft->getPiece() == nullptr)
 	 {
 		  moves.insert(upLeft);
-		  Square* upLeft = board.getSquare(upLeft->getRow() - 1, upLeft->getCol() + 1);
+		  upLeft = board.getSquare(upLeft->getRow() - 1, upLeft->getCol() + 1);
 	 }
 
 	 while (downRight != nullptr && downRight->getPiece() == nullptr)
@@ -45,7 +45,7 @@ set<Square*> Bishop::getMoves() const
 	 while (downLeft != nullptr && downLeft->getPiece() == nullptr)
 	 {
 		  moves.insert(downLeft);
-		  Square* downLeft = board.getSquare(downLeft->getRow() - 1, downLeft->getCol() + 1);
+		  downLeft = board.getSquare(downLeft->getRow() - 1, downLeft->getCol() + 1);
 	 }
 
 	 return moves;
