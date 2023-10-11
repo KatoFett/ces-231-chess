@@ -131,5 +131,6 @@ set<Square*> Queen::getMoves() const
 				moves.insert(right);
 		}
 
+
 		return moves;
 }
