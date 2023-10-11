@@ -40,11 +40,23 @@ set<Square*> Queen::getMoves() const
 				moves.insert(upRight);
 				upRight = board.getSquare(upRight->getRow() + 1, upRight->getCol() + 1);
 		}
+		
+		// If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+		if (upRight != nullptr && player.getColor() != upRight->getPiece()->getPlayer().getColor())
+		{
+				moves.insert(upRight);
+		}
 
 		while (upLeft != nullptr && upLeft->getPiece() == nullptr)
 		{
 				moves.insert(upLeft);
 				upLeft = board.getSquare(upLeft->getRow() - 1, upLeft->getCol() + 1);
+		}
+
+		// If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+		if (upLeft != nullptr && player.getColor() != upLeft->getPiece()->getPlayer().getColor())
+		{
+				moves.insert(upLeft);
 		}
 
 		while (downRight != nullptr && downRight->getPiece() == nullptr)
@@ -53,10 +65,22 @@ set<Square*> Queen::getMoves() const
 				downRight = board.getSquare(downRight->getRow() + 1, downRight->getCol() + 1);
 		}
 
+		// If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+		if (downRight != nullptr && player.getColor() != downRight->getPiece()->getPlayer().getColor())
+		{
+				moves.insert(downRight);
+		}
+
 		while (downLeft != nullptr && downLeft->getPiece() == nullptr)
 		{
 				moves.insert(downLeft);
 				downLeft = board.getSquare(downLeft->getRow() - 1, downLeft->getCol() + 1);
+		}
+
+		// If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+		if (downLeft != nullptr && player.getColor() != downLeft->getPiece()->getPlayer().getColor())
+		{
+				moves.insert(downLeft);
 		}
 
 		while (up != nullptr && up->getPiece() == nullptr)
@@ -65,10 +89,22 @@ set<Square*> Queen::getMoves() const
 				up = square->getUp(direction);
 		}
 
+		// If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+		if (up != nullptr && player.getColor() != up->getPiece()->getPlayer().getColor())
+		{
+				moves.insert(up);
+		}
+
 		while (down != nullptr && down->getPiece() == nullptr)
 		{
 				moves.insert(down);
 				down = square->getDown(direction);
+		}
+
+		// If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+		if (down != nullptr && player.getColor() != down->getPiece()->getPlayer().getColor())
+		{
+				moves.insert(down);
 		}
 
 		while (left != nullptr && left->getPiece() == nullptr)
@@ -77,10 +113,22 @@ set<Square*> Queen::getMoves() const
 				left = square->getLeft(direction);
 		}
 
+		// If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+		if (left != nullptr && player.getColor() != left->getPiece()->getPlayer().getColor())
+		{
+				moves.insert(left);
+		}
+
 		while (right != nullptr && right->getPiece() == nullptr)
 		{
 				moves.insert(right);
 				right = square->getRight(direction);
+		}
+
+		// If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+		if (right != nullptr && player.getColor() != right->getPiece()->getPlayer().getColor())
+		{
+				moves.insert(right);
 		}
 
 		return moves;
