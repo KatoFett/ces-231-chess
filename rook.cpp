@@ -10,66 +10,38 @@ const char* Rook::NAME = "ROOK";
 
 set<Square*> Rook::getMoves() const
 {
-   Board board = Game::getInstance().getBoard();
-   Direction direction = player.getDirection();
-   int i = 1;
+	/*
+			{0,1}
+	   {-1,0} R {1,0}
+			{0,-1}
+	*/
 
-   set<Square*> moves;
+	set<Square*> moves;
+	int deltas[][2] = {
+			{0,1},
+			{0,-1},
+			{-1,0},
+			{1,0}
+	};
 
-   ////Or statements to check if checks should continue once all false while is false
-   bool first = true, second = true, third = true, fourth = true;
-   bool doneChecking = (first || second) || (third || fourth);
+	// For each possible move.
+	for (int* delta : deltas)
+	{
+		// Get the row and col.
+		int row = *delta;
+		int col = *(delta + 1);
+		Square* destination = square->getAdjacent(row, col);
 
-    while (doneChecking) {
-        Square* up = board.getSquare(square->getRow(), square->getCol() + i);
-        //Check until piece is or boundary is found
-        if (up != nullptr && up->getPiece() == nullptr)
-            moves.insert(up);
-        //If piece and not player's color and not boundary add. Sets dont allow for duplicate values so should work
-        else if (up != nullptr && up->getPiece() != nullptr && up->getPiece()->getPlayer().getColor() != player.getColor())
-        {
-            moves.insert(up);
-            first = false;
-        }
-        else {
-            first = false; // set 1/4 of checks to false
-        }
-    
-        Square* down = board.getSquare(square->getRow(), square->getCol() - i);
-        if (down != nullptr && down->getPiece() == nullptr)
-            moves.insert(down);
-        else if (down != nullptr && down->getPiece() != nullptr && down->getPiece()->getPlayer().getColor() != player.getColor())
-        {
-            moves.insert(down);
-            second = false;
-        }
-        else {
-             second = false; // set 1/4 of checks to false
-        }
-        Square* left = board.getSquare(square->getRow() - i, square->getCol());
-        if (left != nullptr && left->getPiece() == nullptr)
-            moves.insert(left);
-        else if (left != nullptr && left->getPiece() != nullptr && left->getPiece()->getPlayer().getColor() != player.getColor())
-        {
-            moves.insert(left);
-            third = false;
-        }
-        else {
-             third = false; // set 1/4 of checks to false
-        }
-        Square* right = board.getSquare(square->getRow() + i, square->getCol());
-        if (right != nullptr && right->getPiece() == nullptr)
-            moves.insert(right);
-        else if (right != nullptr && right->getPiece() != nullptr && right->getPiece()->getPlayer().getColor() != player.getColor())
-        {
-            moves.insert(right);
-            fourth = false;
-        }
-        else {
-             fourth = false; // set 1/4 of checks to false
-        }
-        i++;  // Increment i to check the next square
-    }
-	
-	return set<Square*>();
+		// While we can move to the square.
+		while (canMoveToSquare(destination))
+		{
+			// Insert the move, then get the next square.
+			moves.insert(destination);
+			destination = destination->getAdjacent(row, col);
+		}
+	}
+
+	return moves;
+
+
 }
