@@ -33,7 +33,7 @@ public:
    Square* getRight(const Direction direction) const;
    Square* getUp(const Direction direction) const;
    Square* getDown(const Direction direction) const;
-   Square* getAdjacent(int dCol, int dRow);
+   Square* getAdjacent(int dRow, int dCol);
 
    void setPiece(Piece* newPiece) { piece = newPiece; }
    void setIndex(const int newIdx) { index = newIdx; }
