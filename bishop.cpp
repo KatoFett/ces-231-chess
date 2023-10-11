@@ -32,26 +32,50 @@ set<Square*> Bishop::getMoves() const
 	 **********************************************************/
 	 while (upRight != nullptr && upRight->getPiece() == nullptr)
 	 {
-		  moves.insert(upRight);
-		  upRight = board.getSquare(upRight->getRow() + 1, upRight->getCol() + 1);
+			 moves.insert(upRight);
+			 upRight = board.getSquare(upRight->getRow() + 1, upRight->getCol() + 1);
+	 }
+
+	 // If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+	 if (upRight != nullptr && player.getColor() != upRight->getPiece()->getPlayer().getColor())
+	 {
+			 moves.insert(upRight);
 	 }
 
 	 while (upLeft != nullptr && upLeft->getPiece() == nullptr)
 	 {
-		  moves.insert(upLeft);
-		  upLeft = board.getSquare(upLeft->getRow() - 1, upLeft->getCol() + 1);
+			 moves.insert(upLeft);
+			 upLeft = board.getSquare(upLeft->getRow() - 1, upLeft->getCol() + 1);
+	 }
+
+	 // If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+	 if (upLeft != nullptr && player.getColor() != upLeft->getPiece()->getPlayer().getColor())
+	 {
+			 moves.insert(upLeft);
 	 }
 
 	 while (downRight != nullptr && downRight->getPiece() == nullptr)
 	 {
-		  moves.insert(downRight);
-		  downRight = board.getSquare(downRight->getRow() + 1, downRight->getCol() + 1);
+			 moves.insert(downRight);
+			 downRight = board.getSquare(downRight->getRow() + 1, downRight->getCol() + 1);
+	 }
+
+	 // If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+	 if (downRight != nullptr && player.getColor() != downRight->getPiece()->getPlayer().getColor())
+	 {
+			 moves.insert(downRight);
 	 }
 
 	 while (downLeft != nullptr && downLeft->getPiece() == nullptr)
 	 {
-		  moves.insert(downLeft);
-		  downLeft = board.getSquare(downLeft->getRow() - 1, downLeft->getCol() + 1);
+			 moves.insert(downLeft);
+			 downLeft = board.getSquare(downLeft->getRow() - 1, downLeft->getCol() + 1);
+	 }
+
+	 // If the color of my piece is diffrent from the piece on the square im moving to, we can move there.
+	 if (downLeft != nullptr && player.getColor() != downLeft->getPiece()->getPlayer().getColor())
+	 {
+			 moves.insert(downLeft);
 	 }
 
 	 return moves;
