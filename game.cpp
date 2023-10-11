@@ -51,7 +51,7 @@ Move* Game::getLastMoveEnPassant() const
     // If fourman chess check the player two behind them (1st,2nd,3rd,4th)
     int fourManPrev = moves.size() - 2;
     // Modulus will return what player it is currently 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 1; i < 5; i++) {
         if (currentTurn % 4 == i && players.size() == 4 && currentTurn != 1)
             return moves[fourManPrev];
     }
