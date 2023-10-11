@@ -98,6 +98,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bishop.cpp" />
     <ClCompile Include="board.cpp" />
     <ClCompile Include="chess.cpp" />
     <ClCompile Include="game.cpp" />
@@ -119,6 +120,7 @@
     <ClCompile Include="uiInteract.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bishop.h" />
     <ClInclude Include="board.h" />
     <ClInclude Include="direction.h" />
     <ClInclude Include="game.h" />
