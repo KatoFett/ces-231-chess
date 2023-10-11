@@ -28,6 +28,7 @@ set<Square*> Rook::getMoves() const
         //If piece and not boundary add. Sets dont allow for duplicate values so should work
         if (up != nullptr && up->getPiece() != nullptr)
             moves.insert(up);
+	    first = false; 
         else {
              first = false; // set 1/4 of checks to false
         }
@@ -36,6 +37,7 @@ set<Square*> Rook::getMoves() const
             moves.insert(down);
         if (down != nullptr && down->getPiece() != nullptr)
             moves.insert(down);
+	    second = false; 
         else {
              second = false; // set 1/4 of checks to false
         }
@@ -44,6 +46,7 @@ set<Square*> Rook::getMoves() const
             moves.insert(left);
         if (left != nullptr && left->getPiece() != nullptr)
             moves.insert(left);
+            third = false; 
         else {
              third = false; // set 1/4 of checks to false
         }
@@ -52,6 +55,7 @@ set<Square*> Rook::getMoves() const
             moves.insert(right);
         if (right != nullptr && right->getPiece() != nullptr)
             moves.insert(right);
+            fourth = false; 
         else {
              fourth = false; // set 1/4 of checks to false
         }
