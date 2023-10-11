@@ -25,8 +25,8 @@ set<Square*> Rook::getMoves() const
         //Check until piece is or boundary is found
         if (up != nullptr && up->getPiece() == nullptr)
             moves.insert(up);
-        //If piece and not boundary add. Sets dont allow for duplicate values so should work
-        else if (up != nullptr && up->getPiece() != nullptr)
+        //If piece and not player's color and not boundary add. Sets dont allow for duplicate values so should work
+        else if (up != nullptr && up->getPiece() != nullptr && up->getPiece()->getPlayer().getColor() != player.getColor())
         {
             moves.insert(up);
             first = false;
@@ -38,7 +38,7 @@ set<Square*> Rook::getMoves() const
         Square* down = board.getSquare(square->getRow(), square->getCol() - i);
         if (down != nullptr && down->getPiece() == nullptr)
             moves.insert(down);
-        else if (down != nullptr && down->getPiece() != nullptr)
+        else if (down != nullptr && down->getPiece() != nullptr && down->getPiece()->getPlayer().getColor() != player.getColor())
         {
             moves.insert(down);
             second = false;
@@ -49,7 +49,7 @@ set<Square*> Rook::getMoves() const
         Square* left = board.getSquare(square->getRow() - i, square->getCol());
         if (left != nullptr && left->getPiece() == nullptr)
             moves.insert(left);
-        else if (left != nullptr && left->getPiece() != nullptr)
+        else if (left != nullptr && left->getPiece() != nullptr && left->getPiece()->getPlayer().getColor() != player.getColor())
         {
             moves.insert(left);
             third = false;
@@ -60,7 +60,7 @@ set<Square*> Rook::getMoves() const
         Square* right = board.getSquare(square->getRow() + i, square->getCol());
         if (right != nullptr && right->getPiece() == nullptr)
             moves.insert(right);
-        else if (right != nullptr && right->getPiece() != nullptr)
+        else if (right != nullptr && right->getPiece() != nullptr && right->getPiece()->getPlayer().getColor() != player.getColor())
         {
             moves.insert(right);
             fourth = false;
