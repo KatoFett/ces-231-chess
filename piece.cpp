@@ -33,3 +33,8 @@ Move* Piece::getMoveFromSquare(Square* destination)
    Move* move = new Move(square, destination, this, destination->getPiece());
    return move;
 }
+
+bool Piece::canMoveToSquare(Square* destination)
+{
+   return destination != nullptr && (destination->getPiece() == nullptr || destination->getPiece()->player != player);
+}

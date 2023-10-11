@@ -9,14 +9,14 @@ using namespace std;
 
 string Square::getNotation() const
 {
-   char colLetter = 97 + col;
-   char rankNum = 49 + row;
+   char colLetter = 97 + getCol();
+   char rankNum = 49 + getRow();
    return string({ colLetter, rankNum });
 }
 
 Square* Square::getLeft(Direction direction) const
 {
-   int newCol = col, newRow = row;
+   int newCol = getCol(), newRow = getRow();
    switch (direction)
    {
    case UP:
@@ -40,7 +40,7 @@ Square* Square::getLeft(Direction direction) const
 
 Square* Square::getRight(Direction direction) const
 {
-   int newCol = col, newRow = row;
+   int newCol = getCol(), newRow = getRow();
    switch (direction)
    {
    case UP:
@@ -64,7 +64,7 @@ Square* Square::getRight(Direction direction) const
 
 Square* Square::getUp(Direction direction) const
 {
-   int newCol = col, newRow = row;
+   int newCol = getCol(), newRow = getRow();
    switch (direction)
    {
    case UP:
@@ -88,7 +88,7 @@ Square* Square::getUp(Direction direction) const
 
 Square* Square::getDown(Direction direction) const
 {
-   int newCol = col, newRow = row;
+   int newCol = getCol(), newRow = getRow();
    switch (direction)
    {
    case UP:
@@ -108,4 +108,16 @@ Square* Square::getDown(Direction direction) const
    }
 
    return Game::getInstance().getBoard().getSquare(newRow, newCol);
+}
+
+int Square::getCol() const
+{
+   int width = Game::getInstance().getBoard().getWidth();
+   return index % width;
+}
+
+int Square::getRow() const
+{
+   int width = Game::getInstance().getBoard().getWidth();
+   return index / width;
 }

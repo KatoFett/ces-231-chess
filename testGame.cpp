@@ -24,19 +24,19 @@ void TestGame::testInitDefault()
 {
    // SETUP
    Game game;
-   Board& board = game.getBoard();
 
    // EXERCISE
 
    game.initDefault(false);
 
    // VERIFY
+
+   Board& board = game.getBoard();
+
    // Board must be 8x8.
-   assert(board.squares.size() == 8);			   // 8 rows.
-   for (int i = 0; i < 8; i++)
-   {
-      assert(board.squares[i].size() == 8);		// 8 columns.
-   }
+   assert(board.width == 8);
+   assert(board.height == 8);
+   assert(board.squares.size() == 64);
 
    char* cols[] = { "a", "b", "c", "d", "e", "f", "g", "h" };
 
@@ -45,7 +45,7 @@ void TestGame::testInitDefault()
    {
       int row = i / 8;
       int col = i % 8;
-      Square* square = board.squares[row][col];
+      Square* square = board.squares[i];
       auto squareNotation = square->getNotation();
       auto expectedNotation = cols[col] + to_string(row + 1);
       auto notationMatches = squareNotation == expectedNotation;
