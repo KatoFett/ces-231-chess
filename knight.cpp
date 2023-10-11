@@ -36,28 +36,28 @@ set<Square*> Knight::getMoves() const
 	Square* downOneRightTwo = board.getSquare(square->getRow() - 1, square->getCol() + 2);
 	
 
-	if (upTwoLeftOne != nullptr )
+	if (upTwoLeftOne != nullptr  && upTwoLeftOne->getPiece()->getPlayer().getColor() != player.getColor())
 		moves.insert(upTwoLeftOne);
 
-	if (upOneLeftTwo != nullptr )
+	if (upOneLeftTwo != nullptr && upOneLeftTwo->getPiece()->getPlayer().getColor() != player.getColor())
 		moves.insert(upOneLeftTwo);
 
-	if (downTwoLeftOne != nullptr)
+	if (downTwoLeftOne != nullptr && downTwoLeftOne->getPiece()->getPlayer().getColor() != player.getColor())
 		moves.insert(downTwoLeftOne);
 
-	if (downOneLeftTwo != nullptr )
+	if (downOneLeftTwo != nullptr && downOneLeftTwo->getPiece()->getPlayer().getColor() != player.getColor())
 		moves.insert(downOneLeftTwo);
 
-	if (upTwoRightOne != nullptr)
+	if (upTwoRightOne != nullptr && upTwoRightOne->getPiece()->getPlayer().getColor() != player.getColor())
 		moves.insert(upTwoRightOne);
 
-	if (upOneRightTwo != nullptr)
+	if (upOneRightTwo != nullptr && upOneRightTwo->getPiece()->getPlayer().getColor() != player.getColor())
 		moves.insert(upOneRightTwo);
 
-	if (downTwoRightOne != nullptr)
+	if (downTwoRightOne != nullptr && downTwoRightOne->getPiece()->getPlayer().getColor() != player.getColor())
 		moves.insert(downTwoRightOne);
 
-	if (downOneRightTwo != nullptr)
+	if (downOneRightTwo != nullptr && downOneRightTwo->getPiece()->getPlayer().getColor() != player.getColor())
 		moves.insert(downOneRightTwo);
 
 

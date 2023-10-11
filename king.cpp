@@ -55,7 +55,7 @@ set<Square*> King::getCastleMoves() const
 
 		if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())
 		{
-			moves.insert(rookSquare);
+			moves.insert(rookSquare->getRight(direction)->getRight(direction);
 		}
 
 		// Check right rook.
@@ -67,7 +67,7 @@ set<Square*> King::getCastleMoves() const
 
 		if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())
 		{
-			moves.insert(rookSquare);
+			moves.insert(rookSquare->getLeft(direction));
 		}
 	}
 
