@@ -18,6 +18,7 @@ class Bishop :	 public Piece
 
     set<Square*> getMoves() const override;
     const char* getName() const override { return NAME; }
+    static set<Square*> getBishopMoves(Square* square);
 
 };
 

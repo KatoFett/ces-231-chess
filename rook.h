@@ -19,6 +19,6 @@ public:
 
    const char* getName() const override { return NAME; }
    set<Square*> getMoves() const override;
-   static set<Square*> getRookMoves(Square& square);
+   static set<Square*> getRookMoves(Square* square);
 };
 

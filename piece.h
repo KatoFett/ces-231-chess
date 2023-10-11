@@ -28,7 +28,7 @@ public:
 
    void setHasMoved() { hasMoved = true; }
 
-   bool canMoveToSquare(Square* destination);
+   bool canMoveToSquare(Square* destination) const;
    Move* moveToSquare(Square* destination);
 };
 

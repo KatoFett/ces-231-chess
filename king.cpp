@@ -17,48 +17,17 @@ set<Square*> King::getMoves() const
 	*/
 
 	set<Square*> moves;
-	Board board = Game::getInstance().getBoard();
-	Direction direction = player.getDirection();
-	Square* oneAhead = square->getUp(direction);
-	Square* topLeft = board.getSquare(square->getRow() + 1, square->getCol() - 1);
-	Square* topRight = board.getSquare(square->getRow() + 1, square->getCol() + 1);
-	Square* oneBack = square->getDown(direction);
-	Square* bottomLeft = board.getSquare(square->getRow() - 1, square->getCol() - 1);
-	Square* bottomRight = board.getSquare(square->getRow() - 1, square->getCol() + 1);
-	Square* oneLeft = square->getLeft(direction);
-	Square* oneRight = square->getRight(direction);
 
-	//[0,1]
-	if (oneAhead != nullptr && oneAhead->getPiece() == nullptr)
-		moves.insert(oneAhead);
-
-	 //[-1,1]
-	 if (topLeft != nullptr && topLeft->getPiece() == nullptr)
-		  moves.insert(topLeft);
-
-	 //[1,1]
-	 if (topRight != nullptr && topRight->getPiece() == nullptr)
-		  moves.insert(topRight);
-	
-	//[0,-1]
-	if (oneBack != nullptr && oneBack->getPiece() == nullptr)
-		moves.insert(oneBack);
-	
-	 //[-1,-1]
-	 if (bottomLeft != nullptr && bottomLeft->getPiece() == nullptr)
-		  moves.insert(bottomLeft);
-
-	 //[1,-1]
-	 if (bottomRight != nullptr && bottomRight->getPiece() == nullptr)
-		  moves.insert(bottomRight);
-	
-	//[-1,0]
-	if (oneLeft != nullptr && oneLeft->getPiece() == nullptr)
-		moves.insert(oneLeft);
-	
-	//[1,0]
-	if (oneRight != nullptr && oneRight->getPiece() == nullptr)
-		moves.insert(oneRight);
+	int cols[] = { -1, 0, 1 };
+	int rows[] = { -1, 0, 1 };
+	for (int col : cols)
+	{
+		for (int row : rows)
+		{
+			Square* destination = square->getAdjacent(col, row);
+			if (canMoveToSquare(destination)) moves.insert(destination);
+		}
+	}
 
 	set<Square*> castleMoves = getCastleMoves();
 

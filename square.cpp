@@ -121,3 +121,11 @@ int Square::getRow() const
    int width = Game::getInstance().getBoard().getWidth();
    return index / width;
 }
+
+Square* Square::getAdjacent(int dRow, int dCol)
+{
+   if (dCol == 0 && dRow == 0) return this;
+   dRow += getRow();
+   dCol += getCol();
+   return Game::getInstance().getBoard().getSquare(dRow, dCol);
+}

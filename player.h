@@ -21,11 +21,8 @@ public:
       copy_n(color, 3, this->color);
    }
 
-   bool operator ==(const Player& rhs) const { return this == &rhs; }
-
-   bool operator == (Player& rhs) { return this == &rhs; }
-   bool operator != (Player& rhs) { return this != &rhs; }
-
+   bool operator == (const Player& rhs) const { return this == &rhs; }
+   bool operator != (const Player& rhs) const { return this != &rhs; }
 
    Direction getDirection() const { return direction; }
    int* getColor() { return color; }

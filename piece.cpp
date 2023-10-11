@@ -34,7 +34,7 @@ Move* Piece::getMoveFromSquare(Square* destination)
    return move;
 }
 
-bool Piece::canMoveToSquare(Square* destination)
+bool Piece::canMoveToSquare(Square* destination) const
 {
    return destination != nullptr && (destination->getPiece() == nullptr || destination->getPiece()->player != player);
 }
