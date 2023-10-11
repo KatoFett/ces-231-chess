@@ -9,31 +9,28 @@ Square* Board::operator[](const char* notation) const
    if (strlen(notation) != 2) throw "Invalid notation.";
 
    int col = notation[0] - 97;
-   if (col < 0 || col > squares.size()) throw "Column does not exist.";
+   if (col < 0 || col >= width) throw "Column does not exist.";
 
    int row = notation[1] - 49;
-   if (row < 0 || row > squares[col].size()) throw "Row does not exist.";
+   if (row < 0 || row >= height) throw "Row does not exist.";
 
-   return squares[row][col];
+   int index = getIndexFromRowCol(row, col);
+
+   return squares[index];
 }
 
-void Board::addSquare(int row, Square* square)
+void Board::addSquare(Square* square)
 {
-   if (row > squares.size())
-      throw "Skipped one or more rows while initializing squares.";
-
-   if (row == squares.size())
-      squares.push_back(vector<Square*>());
-
+   squares[squareCount] = square;
    square->setIndex(squareCount++);
-
-   squares[row].push_back(square);
 }
 
 Square* Board::getSquare(int row, int col) const
 {
-   if (row < 0 || row >= squares.size()) return nullptr;
-   if (col < 0 || col >= squares[row].size()) return nullptr;
+   if (row < 0 || row >= width) return nullptr;
+   if (col < 0 || col >= height) return nullptr;
 
-   return squares[row][col];
+   int index = getIndexFromRowCol(row, col);
+   
+   return squares[index];
 }

@@ -12,6 +12,8 @@ void Game::initDefault(bool assignPieces)
    int whiteColor[] = { 255, 255, 255 };
    int blackColor[] = { 0, 0, 0 };
 
+   board = new Board(8, 8);
+
    // Create 2 players.
    Player* white = new Player(Direction::UP, whiteColor);
    Player* black = new Player(Direction::DOWN, blackColor);
@@ -24,8 +26,8 @@ void Game::initDefault(bool assignPieces)
    {
       for (int col = 0; col < 8; col++)
       {
-         Square* square = new Square(row, col, isDark);
-         board.addSquare(row, square);
+         Square* square = new Square(isDark);
+         board->addSquare(square);
          isDark = !isDark;
       }
    }
@@ -35,21 +37,17 @@ void Game::addPlayer(Player& player)
 {
    players.push_back(&player);
    playerCount++;
-
-   if (currentTurn == nullptr)
-      currentTurn = &player;
 }
 
 Move* Game::getLastMoveFromPlayer(Player& player) const
 {
-    //I know this doesnt work for for man chess it currently only checks the last move made
-    if (moves.empty()) 
-        throw "no moves have been made.";
-    
+   //I know this doesnt work for for man chess it currently only checks the last move made
+   if (moves.empty())
+      throw "no moves have been made.";
 
-    int prev = moves.size() - 1;
-    
-    return moves[prev];
+   int prev = moves.size() - 1;
+
+   return moves[prev];
 
 }
 

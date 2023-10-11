@@ -27,7 +27,9 @@ public:
    virtual Move* getMoveFromSquare(Square* destination);
 
    void setHasMoved() { hasMoved = true; }
-   Move* moveToSquare(Square* square);
+
+   bool canMoveToSquare(Square* destination);
+   Move* moveToSquare(Square* destination);
 };
 
 
