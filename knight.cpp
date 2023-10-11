@@ -2,7 +2,6 @@
 #include "square.h"
 #include "game.h"
 #include "move.h"
-#include "rook.h"
 #include "player.h"
 #include <set>
 
