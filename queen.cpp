@@ -19,16 +19,22 @@ set<Square*> Queen::getMoves() const
 		Board board = Game::getInstance().getBoard();
 		Direction direction = player.getDirection();
 
+		// All the diagonal moves.
 		Square* upRight = board.getSquare(square->getRow() + 1, square->getCol() + 1);
 		Square* upLeft = board.getSquare(square->getRow() - 1, square->getCol() + 1);
 		Square* downRight = board.getSquare(square->getRow() + 1, square->getCol() - 1);
 		Square* downLeft = board.getSquare(square->getRow() - 1, square->getCol() - 1);
 
+		// All the straight moves.
 		Square* up = square->getUp(direction);
 		Square* left = square->getLeft(direction);
 		Square* down = square->getDown(direction);
 		Square* right = square->getRight(direction);
 
+		/****************************************************************************************
+		* Until we reach the edge of the board, or hit another peice, add the moves to the list.
+		* After we add the move, increment to the next spot for the respective move.
+		****************************************************************************************/
 		while (upRight != nullptr && upRight->getPiece() == nullptr)
 		{
 				moves.insert(upRight);
@@ -78,5 +84,4 @@ set<Square*> Queen::getMoves() const
 		}
 
 		return moves;
-   return set<Square*>();
 }

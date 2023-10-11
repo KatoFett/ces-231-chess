@@ -19,11 +19,17 @@ set<Square*> Bishop::getMoves() const
 	 Board board = Game::getInstance().getBoard();
 	 Direction direction = player.getDirection();
 
+	 // All diagonal moves.
 	 Square* upRight = board.getSquare(square->getRow() + 1, square->getCol() + 1);
 	 Square* upLeft = board.getSquare(square->getRow() - 1, square->getCol() + 1);
 	 Square* downRight = board.getSquare(square->getRow() + 1, square->getCol() - 1);
 	 Square* downLeft = board.getSquare(square->getRow() - 1, square->getCol() - 1);
 
+	 /*********************************************************
+	 * Until we hit another piece or the edge of the board, the move is possible.
+	 * Accounts for all possible directions for the bishop.
+	 * After adding the move, increment to the next move in the direction.
+	 **********************************************************/
 	 while (upRight != nullptr && upRight->getPiece() == nullptr)
 	 {
 		  moves.insert(upRight);
