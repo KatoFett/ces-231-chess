@@ -69,17 +69,33 @@ set<Square*> Pawn::getMoves() const
    const Direction direction = player.getDirection();
 
    std::set<Square*> moves;
+   int deltas[][2] = {
+       {1,1}, {1,-1},
+       {-1,1}, {-1, -1}
+   };
    Square* oneAhead = square->getUp(direction);
 
    //Check no piece is in front
-   if (oneAhead->getPiece() == nullptr)
+   if (oneAhead != nullptr && oneAhead->getPiece() == nullptr)
       moves.insert(oneAhead);
    //Check no piece in front or two ahead and pawn hasnt moved
-   if (oneAhead->getUp(direction)->getPiece()  == nullptr && !hasMoved && oneAhead->getPiece() == nullptr)
+   if (oneAhead->getUp(direction) != nullptr && oneAhead->getUp(direction)->getPiece()  == nullptr && !hasMoved && oneAhead->getPiece() == nullptr)
       moves.insert(oneAhead->getUp(direction));
    //Check if enPassant is allowed
    if (getEnPassantMove() != nullptr)
        moves.insert(getEnPassantMove());
+   //capture
+   for (int* delta : deltas)
+   {
+       int row = *delta;
+       int col = *(delta + 1);
+       Square* destination = square->getAdjacent(row, col);
+
+       if (destination != nullptr && destination->getPiece() != nullptr && destination->getPiece()->getPlayer() != player)
+       {
+           moves.insert(destination);
+       }
+   }
 
    return moves;
 }

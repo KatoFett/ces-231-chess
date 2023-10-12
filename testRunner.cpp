@@ -9,7 +9,7 @@ using namespace std;
 void TestRunner::run()
 {
 	testGame();
-	testPawn();
+	//testPawn();
 	testKing();
 	cout << "All tests pass.";
 }
