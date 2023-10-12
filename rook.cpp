@@ -39,7 +39,14 @@ set<Square*> Rook::getRookMoves(Square* square)
 		{
 			// Insert the move, then get the next square.
 			moves.insert(destination);
-			destination = destination->getAdjacent(row, col);
+			if (destination->getPiece() == nullptr)
+			{
+				 destination = destination->getAdjacent(row, col);
+			}
+			else
+			{
+				 destination = nullptr;
+			}
 		}
 	}
 
