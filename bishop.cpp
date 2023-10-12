@@ -8,7 +8,7 @@ using namespace std;
 
 const char* Bishop::NAME = "BISHOP";
 
-set<Square*> Bishop::getMoves() const
+set<Square*> Bishop::getBishopMoves(Square* square)
 {
 	 /*
 	 { -1,  1}, {  1,  1}
@@ -23,6 +23,9 @@ set<Square*> Bishop::getMoves() const
 			 {1,-1}
 	 };
 
+	 Player& player = square->getPiece()->getPlayer();
+
+
 	 // For each possible move.
 	 for (int* delta : deltas)
 	 {
@@ -32,7 +35,7 @@ set<Square*> Bishop::getMoves() const
 			 Square* destination = square->getAdjacent(row, col);
 
 			 // While we can move to the square.
-			 while (canMoveToSquare(destination))
+			 while (canMoveToSquare(player, destination))
 			 {
 					 // Insert the move, then get the next square.
 					 moves.insert(destination);

@@ -18,6 +18,9 @@ set<Square*> King::getMoves() const
 
 	set<Square*> moves;
 
+	Player& player = square->getPiece()->getPlayer();
+
+
 	int cols[] = { -1, 0, 1 };
 	int rows[] = { -1, 0, 1 };
 	for (int col : cols)
@@ -25,7 +28,7 @@ set<Square*> King::getMoves() const
 		for (int row : rows)
 		{
 			Square* destination = square->getAdjacent(col, row);
-			if (canMoveToSquare(destination)) moves.insert(destination);
+			if (canMoveToSquare(player, destination)) moves.insert(destination);
 		}
 	}
 

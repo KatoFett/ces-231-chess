@@ -8,7 +8,7 @@ using namespace std;
 
 const char* Rook::NAME = "ROOK";
 
-set<Square*> Rook::getMoves() const
+set<Square*> Rook::getRookMoves(Square* square)
 {
 	/*
 			{0,1}
@@ -24,6 +24,8 @@ set<Square*> Rook::getMoves() const
 			{1,0}
 	};
 
+	Player& player = square->getPiece()->getPlayer();
+
 	// For each possible move.
 	for (int* delta : deltas)
 	{
@@ -33,7 +35,7 @@ set<Square*> Rook::getMoves() const
 		Square* destination = square->getAdjacent(row, col);
 
 		// While we can move to the square.
-		while (canMoveToSquare(destination))
+		while (canMoveToSquare(player, destination))
 		{
 			// Insert the move, then get the next square.
 			moves.insert(destination);
