@@ -1,5 +1,7 @@
 #include "queen.h"
 #include "square.h"
+#include "bishop.h"
+#include "rook.h"
 #include "game.h"
 #include "rook.h"
 #include "bishop.h"

@@ -10,6 +10,18 @@
 
 using namespace std;
 
+bool valueIn(set<Square*> moves, const char* notation)
+{
+		for each (Square* move in moves)
+		{
+				if (move->getNotation() == notation)
+				{
+						return true;
+				}
+		}
+		return false;
+}
+
 void TestKing::run()
 {
 	testKingInFront();
@@ -27,8 +39,8 @@ void TestKing::testKingInFront()
 	Player& player = game.getPlayer(0);
 
 
-	Pawn Pawn(board["d2"], player);
-	King king(board["d1"], player);
+	Pawn Pawn(board["e2"], player);
+	King king(board["e1"], player);
 
 	//Exercise
 	set<Square*> moves = king.getMoves();
@@ -51,7 +63,7 @@ void TestKing::testKingGetCastleMoves()
 
 
 	Rook rook(board["a1"], player);
-	King king(board["d1"], player);
+	King king(board["e1"], player);
 
 	//Exercise
 	set<Square*> moves = king.getMoves();
@@ -71,8 +83,10 @@ void TestKing::testKingMove()
 	Board& board = game.getBoard();
 	Player& player = game.getPlayer(0);
 
-	King king(board["d2"], player);
+	King king(board["c2"], player);
 	string startLocation = king.getSquare()->getNotation();
+
+	set<Square*> moves = king.getMoves();
 
 	game.setSelectedPiece(&king);
 
@@ -80,7 +94,8 @@ void TestKing::testKingMove()
 	game.move(board["d3"]);
 
 	//Verify
-	assert(startLocation == "d2"); //Start location.
+	assert(startLocation == "c2"); //Start location.
+	assert(valueIn(moves, "d3"));
 	assert(king.getSquare()->getNotation() == "d3"); //End location.
 
 
@@ -96,10 +111,10 @@ void TestKing::testKingGetMoves()
 	Player& player = game.getPlayer(0);
 
 
-	King king(board["d1"], player);
-	Pawn pawn1(board["c1"], player);
-	Pawn pawn2(board["c2"], player);
-	Pawn pawn3(board["e2"], player);
+	King king(board["c1"], player);
+	Pawn pawn1(board["b1"], player);
+	Pawn pawn2(board["b2"], player);
+	Pawn pawn3(board["d1"], player);
 
 
 	//Exercise

@@ -13,6 +13,7 @@ using namespace std;
 void TestPawn::run()
 {
    testGetEnpassantMove();
+   //testGetEnpassantMoveFourPlayers();
    testPawnInFront();
    testPawnPromote();
    testPawnOneMove();
@@ -50,7 +51,55 @@ void TestPawn::testGetEnpassantMove()
 
    //Tear down
 }
-
+//void TestPawn::testGetEnpassantMoveFourPlayers()
+//{
+//	//Set Up
+//	Game game;
+//	game.initDefault('fourman.text');
+//	Board& board = game.getBoard();
+//	Player& player1 = game.getPlayer(0);
+//	Player& player2 = game.getPlayer(1);
+//	Player& player3 = game.getPlayer(3);
+//	Player& player4 = game.getPlayer(4);
+//
+//	Pawn pawnWhite1(board["c4"], player1);
+//	Pawn pawnBlack1(board["d6"], player2);
+//	Pawn pawnBlack2(board["b7"], player2);
+//	
+//	Pawn pawnGreen(board["f4"], player3);
+//	Pawn pawnBlue(board["e7"], player4);
+//
+//
+//
+//
+//	// Set current player to black.
+//	game.setSelectedPiece(&pawnWhite1);
+//	game.move(board["c5"]);
+//	// Move green pawn
+//	game.setSelectedPiece(&pawnGreen);
+//	game.move(board["f5"]);
+//	// Move black pawn.
+//	game.setSelectedPiece(&pawnBlack2);
+//	game.move(board["b5"]);
+//
+//	game.setSelectedPiece(&pawnBlue);
+//	game.move(board["e5"]);
+//	
+//	game.setSelectedPiece(&pawnBlack1);
+//	game.move(board["d5"]);
+//
+//	//Exercise
+//	Square* whiteEnpassant = pawnWhite1.getEnPassantMove();
+//	Square* greenEnpassant = pawnGreen.getEnPassantMove();
+//
+//	//Verify
+//
+//
+//	assert(whiteEnpassant->getNotation() == "b6");
+//	assert(greenEnpassant->getNotation() == "e6");
+//
+//	//Tear down
+//}
 void TestPawn::testPawnInFront()
 {
    //Set Up

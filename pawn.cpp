@@ -15,17 +15,21 @@ const char* Pawn::NAME = "PAWN";
 
 bool Pawn::checkEnPassant(Square* enPassantSquare) const
 {
-   if (enPassantSquare == nullptr) return false;
+    // check to make sure enPassantSquare is valid square
+    if (enPassantSquare == nullptr) return false;
 
+   // Piece is a valid piece and it is a pawn
    Piece* piece = enPassantSquare->getPiece();
    if (piece != nullptr && piece->getName() == Pawn::NAME)
    {
+      // Make sure enpassantSquare is somehow not your piece
       Player piecePlayer = piece->getPlayer();
       if (piecePlayer != player)
       {
          Direction direction = player.getDirection();
          
-         Move* lastMove = Game::getInstance().getLastMoveFromPlayer(piecePlayer);
+         // Check to make sure that the move was made last turn only and pawn made a two space jump
+         Move* lastMove = Game::getInstance().getLastMoveEnPassant();
          if (lastMove != nullptr && enPassantSquare->getUp(direction)->getUp(direction) == lastMove->getFrom())
          {
             return true;
@@ -43,7 +47,7 @@ Square* Pawn::getEnPassantMove() const
 
    Direction direction = player.getDirection();
 
-   // Check Left
+   // Check Left 
    Square* enPassantSquare = square->getLeft(direction);
    if (checkEnPassant(enPassantSquare) && enPassantSquare->getUp(direction) != nullptr)
       return enPassantSquare->getUp(direction);
@@ -57,10 +61,9 @@ Square* Pawn::getEnPassantMove() const
 }
 
 //int Pawn::getRank() {
-//	Square& square ;	
-//	/*if(game.initDefault(false))*/
-//	return square.getCol();
+//  Board& board = board.getHeight()
 //}
+
 set<Square*> Pawn::getMoves() const
 {
    Direction direction = player.getDirection();
@@ -68,10 +71,15 @@ set<Square*> Pawn::getMoves() const
    std::set<Square*> moves;
    Square* oneAhead = square->getUp(direction);
 
+   //Check no piece is in front
    if (oneAhead->getPiece() == nullptr)
       moves.insert(oneAhead);
+   //Check no piece in front or two ahead and pawn hasnt moved
    if (oneAhead->getUp(direction)->getPiece()  == nullptr && !hasMoved && oneAhead->getPiece() == nullptr)
       moves.insert(oneAhead->getUp(direction));
+   //Check if enPassant is allowed
+   if (getEnPassantMove() != nullptr)
+       moves.insert(getEnPassantMove());
 
    return moves;
 }
@@ -83,5 +91,4 @@ void Pawn::promote(Piece* toPiece)
    player.removePiece(toPiece);
    player.addPiece(toPiece);
    square->setPiece(toPiece);
-   //delete this;
 }

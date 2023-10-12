@@ -45,7 +45,7 @@ public:
    Board& getBoard() { return *board; }
    Player& getCurrentTurn() const { return *players[currentTurn]; }
    Player& getPlayer(int index) { return *players[index]; }
-   Move* getLastMoveFromPlayer(Player& player) const;
+   Move* getLastMoveEnPassant() const;
 
    void setSelectedPiece(Piece* piece) { selectedPiece = piece; }
 
