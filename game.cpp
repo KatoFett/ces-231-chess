@@ -49,46 +49,37 @@ void Game::initDefault(bool assignPieces)
          const char* startingSquare = blackPlayer ? "h8" : "a1";
 
          // Add special pieces.
-         Square* square = (*board)[startingSquare];         
-         Piece* pieceToAdd = new Rook(square, player);
-         player.addPiece(pieceToAdd);
+         Square* square = (*board)[startingSquare];
+         new Rook(square, player);
 
          square = square->getRight(direction);
-         pieceToAdd = new Knight(square, player);
-         player.addPiece(pieceToAdd);
+         new Knight(square, player);
 
          square = square->getRight(direction);
-         pieceToAdd = new Bishop(square, player);
-         player.addPiece(pieceToAdd);
+         new Bishop(square, player);
 
          // Black king or white queen.
          square = square->getRight(direction);
-         pieceToAdd = blackPlayer ? (Piece*)(new King(square, player)) : new Queen(square, player);
-         player.addPiece(pieceToAdd);
+         blackPlayer ? (Piece*)(new King(square, player)) : new Queen(square, player);
 
          // Black queen or white king.
          square = square->getRight(direction);
-         pieceToAdd = blackPlayer ? (Piece*)(new Queen(square, player)) : new King(square, player);
-         player.addPiece(pieceToAdd);
+         blackPlayer ? (Piece*)(new Queen(square, player)) : new King(square, player);
 
          square = square->getRight(direction);
-         pieceToAdd = new Bishop(square, player);
-         player.addPiece(pieceToAdd);
+         new Bishop(square, player);
 
          square = square->getRight(direction);
-         pieceToAdd = new Knight(square, player);
-         player.addPiece(pieceToAdd);
+         new Knight(square, player);
 
          square = square->getRight(direction);
-         pieceToAdd = new Rook(square, player);
-         player.addPiece(pieceToAdd);
+         new Rook(square, player);
 
          // Add pawns.
          square = square->getUp(direction);
          for (int n = 0; n < 8; n++)
          {
-            Piece* pieceToAdd = new Pawn(square, player);
-            player.addPiece(pieceToAdd);
+            new Pawn(square, player);
             square = square->getLeft(direction);
          }
       }
@@ -121,4 +112,19 @@ void Game::move(Square* square)
 
    Move* move = selectedPiece->moveToSquare(square);
    moves.push_back(move);
+
+   bool playerFound = false;
+
+   // Move to next player, which may have to skip some if they have no pieces.
+   while (!playerFound)
+   {
+      // Move to next player.
+      currentTurn++;
+      if (currentTurn == playerCount)
+         currentTurn = 0;
+      
+      // Check if the player can play a move.
+      // If the game is over, only the remaining player will have any pieces left.
+      playerFound = players[currentTurn]->hasPieces();
+   }
 }

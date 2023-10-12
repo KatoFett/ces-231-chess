@@ -7,6 +7,7 @@ Piece::Piece(Square* square, Player& player) :
    square(square), player(player), hasMoved(false)
 {
    this->square->setPiece(this);
+   player.addPiece(this);
 }
 
 Move* Piece::moveToSquare(Square* destination)

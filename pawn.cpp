@@ -89,6 +89,5 @@ void Pawn::promote(Piece* toPiece)
    if (toPiece == nullptr) throw "Cannot promote to null piece.";
 
    player.removePiece(toPiece);
-   player.addPiece(toPiece);
    square->setPiece(toPiece);
 }

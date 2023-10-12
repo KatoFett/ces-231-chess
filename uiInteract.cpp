@@ -17,6 +17,7 @@
 #include <cstdlib>    // for rand()
 #include "game.h"     // for selected piece
 #include "square.h"   // for selected piece
+#include "piece.h"    // for piece moves
 
 
 #ifdef __APPLE__
@@ -139,15 +140,46 @@ void clickCallback(int button, int state, int x, int y)
       // get coordinates from screen dimensions
       int pos = ui.positionFromXY(x, y);
 
+      Game& game = Game::getInstance();
+      // Keep track if we're moving a piece, to deselect it later.
+      bool moved = false;
+
+      // If a piece is currently selected, attempt to move it to that square.
+      if (game.getSelectedPiece() != nullptr)
+      {
+         set<Square*> possibleMoves = game.getSelectedPiece()->getMoves();
+         // Iterate through possible moves to see if we're moving the piece.
+         for (Square* square : possibleMoves)
+         {
+            if (square->getIndex() == pos)
+            {
+               game.move(square);
+               moved = true;
+               break;      // Don't need to iterate through the rest.
+            }
+         }
+      }
+
+      // Update the selected piece if we moved or not.
+      Piece* newSelectedPiece = nullptr;
+      if (!moved)
+      {
+         Square* square = Game::getInstance().getBoard()[pos];
+         if (square != nullptr && (square->getPiece() == nullptr || square->getPiece()->getPlayer() == game.getCurrentTurn()))
+         {
+            newSelectedPiece = square->getPiece();
+            // Deselect selected piece if it's the same.
+            if (newSelectedPiece == game.getSelectedPiece())
+               newSelectedPiece = nullptr;
+         }
+      }
+      game.setSelectedPiece(newSelectedPiece);
+
       // if the current cell is selected, then deselect it
       if (ui.getSelectPosition() == pos)
          ui.clearSelectPosition();
       else
          ui.setSelectPosition(pos);
-
-      Square* square = Game::getInstance().getBoard()[pos];
-      if (square != nullptr)
-         Game::getInstance().setSelectedPiece(square->getPiece());
    }
 }
 

@@ -25,11 +25,11 @@ set<Square*> Knight::getMoves() const
       {-1,  2},
       { 1,  2},
       {-1, -2},
-      {-1, -2},
+      { 1, -2},
       {-2,  1},
       { 2,  1},
       {-2, -1},
-      {-2, -1},
+      { 2, -1},
    };
 
    for (int* delta : deltas)
@@ -37,7 +37,7 @@ set<Square*> Knight::getMoves() const
       int row = *delta;
       int col = *(delta + 1);
       Square* destination = square->getAdjacent(row, col);
-      if (canMoveToSquare(destination)) moves.insert(destination);
+      if (canMoveToSquare(player, destination)) moves.insert(destination);
    }
 
    return moves;
