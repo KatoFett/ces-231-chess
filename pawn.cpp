@@ -91,5 +91,4 @@ void Pawn::promote(Piece* toPiece)
    player.removePiece(toPiece);
    player.addPiece(toPiece);
    square->setPiece(toPiece);
-   delete this;
 }
