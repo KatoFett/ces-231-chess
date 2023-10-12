@@ -3,6 +3,8 @@
 #include "bishop.h"
 #include "rook.h"
 #include "game.h"
+#include "rook.h"
+#include "bishop.h"
 #include <set>
 
 using namespace std;
@@ -11,24 +13,12 @@ const char Queen::NAME = 'Q';
 
 set<Square*> Queen::getMoves() const
 {
-		/*
-		{ -1,  1}, {  0,  1}, {  1,  1},
-		{ -1,  0},            {  1,  0},
-		{ -1, -1}, {  0, -1}, {  1, -1}
-	*/
+   set<Square*> moves = Rook::getRookMoves(square);
 
-		Board board = Game::getInstance().getBoard();
-		Direction direction = player.getDirection();
+   // Combine rook and bishop moves.
+   set<Square*> bishopMoves = Bishop::getBishopMoves(square);
+   for (Square* move : bishopMoves)
+      moves.insert(move);
 
-		set<Square*> moves = Bishop::getBishopMoves(this->square);
-		set<Square*> rookMoves = Rook::getRookMoves(this->square);
-
-		
-		for (Square* move : rookMoves)
-		{
-				moves.insert(move);
-		}
-
-
-		return moves;
+   return moves;
 }
