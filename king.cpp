@@ -32,6 +32,7 @@ set<Square*> King::getMoves() const
 		}
 	}
 
+	// This will give us moves if castling is possible.
 	set<Square*> castleMoves = getCastleMoves();
 
 	for each (Square* move in castleMoves)
@@ -58,6 +59,7 @@ set<Square*> King::getCastleMoves() const
 
 		if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())
 		{
+			// This is where the king will end up.
 			moves.insert(rookSquare->getRight(direction)->getRight(direction));
 		}
 
@@ -70,6 +72,7 @@ set<Square*> King::getCastleMoves() const
 
 		if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())
 		{
+			//This is where the king will end up.
 			moves.insert(rookSquare->getLeft(direction));
 		}
 	}
