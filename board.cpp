@@ -19,6 +19,11 @@ Square* Board::operator[](const char* notation) const
    return squares[index];
 }
 
+Square* Board::operator[](const int index) const
+{
+   return squares[index];
+}
+
 void Board::addSquare(Square* square)
 {
    squares[squareCount] = square;

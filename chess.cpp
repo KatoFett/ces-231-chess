@@ -11,69 +11,72 @@
 #include <fstream>        // for IFSTREAM
 #include <string>         // for STRING
 #include "testRunner.h"	  // for tests
+#include "square.h"
+#include "game.h"
+#include "board.h"
+#include "rook.h"
+#include "knight.h"
+#include "bishop.h"
+#include "queen.h"
+#include "king.h"
+#include "pawn.h"
+
 using namespace std;
 
 /***************************************************
  * DRAW
  * Draw the current state of the game
  ***************************************************/
-void draw(const char* board, const Interface& ui, const set <int>& possible)
+void draw(const Game& game, const Interface& ui)
 {
-	ogstream gout;
+   ogstream gout;
 
-	// draw the checkerboard
-	gout.drawBoard();
+   // draw the checkerboard
+   gout.drawBoard();
 
-	// draw any selections
-	gout.drawHover(ui.getHoverPosition());
-	gout.drawSelected(ui.getSelectPosition());
+   // draw any selections
+   gout.drawHover(ui.getHoverPosition());
+   gout.drawSelected(ui.getSelectPosition());
 
-	// draw the possible moves
-	set <int> ::iterator it;
-	for (it = possible.begin(); it != possible.end(); ++it)
-		gout.drawPossible(*it);
+   // draw the possible moves
+   if (game.getSelectedPiece() != nullptr)
+   {
+      set<Square*> possible = game.getSelectedPiece()->getMoves();
+      set <Square*> ::iterator it;
+      for (it = possible.begin(); it != possible.end(); ++it)
+         gout.drawPossible((*it)->getIndex());
+   }
 
-	// draw the pieces
-	for (int i = 0; i < 64; i++)
-		switch (board[i])
-		{
-		case 'P':
-			gout.drawPawn(i, true);
-			break;
-		case 'p':
-			gout.drawPawn(i, false);
-			break;
-		case 'K':
-			gout.drawKing(i, true);
-			break;
-		case 'k':
-			gout.drawKing(i, false);
-			break;
-		case 'Q':
-			gout.drawQueen(i, true);
-			break;
-		case 'q':
-			gout.drawQueen(i, false);
-			break;
-		case 'R':
-			gout.drawRook(i, true);
-			break;
-		case 'r':
-			gout.drawRook(i, false);
-			break;
-		case 'B':
-			gout.drawBishop(i, true);
-			break;
-		case 'b':
-			gout.drawBishop(i, false);
-			break;
-		case 'N':
-			gout.drawKnight(i, true);
-			break;
-		case 'n':
-			gout.drawKnight(i, false);
-			break;
-		}
+   // draw the pieces
+   for (int i = 0; i < 64; i++)
+   {
+      Piece* piece = game.getBoard()[i]->getPiece();
+      if (piece != nullptr)
+      {
+         bool isBlack = piece->getPlayer() == game.getPlayer(1);  // Needs to be adjusted for 4-player chess.
+         switch (piece->getName())
+         {
+         case 'P':
+            gout.drawPawn(i, isBlack);
+            break;
+         case 'K':
+            gout.drawKing(i, isBlack);
+            break;
+         case 'Q':
+            gout.drawQueen(i, isBlack);
+            break;
+         case 'R':
+            gout.drawRook(i, isBlack);
+            break;
+         case 'B':
+            gout.drawBishop(i, isBlack);
+            break;
+         case 'N':
+            gout.drawKnight(i, isBlack);
+            break;
+         }
+      }
+   }
 }
 
 /*************************************
@@ -85,13 +88,13 @@ void draw(const char* board, const Interface& ui, const set <int>& possible)
  **************************************/
 void callBack(Interface* pUI, void* p)
 {
-	set <int> possible;
+   // the first step is to cast the void pointer into a game object. This
+   // is the first step of every single callback function in OpenGL. 
 
-	// the first step is to cast the void pointer into a game object. This
-	// is the first step of every single callback function in OpenGL. 
+   Game& game = *(Game*)p;
 
-	// draw the board
-	//draw(board, *pUI, possible);
+   // draw the board
+   draw(game, *pUI);
 
 }
 
@@ -104,33 +107,36 @@ void callBack(Interface* pUI, void* p)
 #ifdef _WIN32
 #include <windows.h>
 int WINAPI WinMain(
-	_In_ HINSTANCE hInstance,
-	_In_opt_ HINSTANCE hPrevInstance,
-	_In_ PSTR pCmdLine,
-	_In_ int nCmdShow)
+   _In_ HINSTANCE hInstance,
+   _In_opt_ HINSTANCE hPrevInstance,
+   _In_ PSTR pCmdLine,
+   _In_ int nCmdShow)
 #else // !_WIN32
 int main(int argc, char** argv)
 #endif // !_WIN32
 {
-	// Run tests
-	TestRunner tests;
-	tests.run();
+   // Run tests
+   TestRunner tests;
+   tests.run();
 
-	Interface ui("Chess");
+   Game game;
+   game.initDefault(true);
 
-	//#ifdef _WIN32
-	// //  int    argc;
-	// //  LPWSTR * argv = CommandLineToArgvW(GetCommandLineW(), &argc);
-	// //  string filename = argv[1];
-	//   if (__argc == 2)
-	//      readFile(__argv[1], board);
-	//#else // !_WIN32
-	//   if (argc == 2)
-	//      readFile(argv[1], board);
-	//#endif // !_WIN32
+   Interface ui("Chess");
 
-	// set everything into action
-	//ui.run(callBack, board);        
+   //#ifdef _WIN32
+   //   //  int    argc;
+   //   //  LPWSTR * argv = CommandLineToArgvW(GetCommandLineW(), &argc);
+   //   //  string filename = argv[1];
+   //   if (__argc == 2)
+   //      readFile(__argv[1], board);
+   //#else // !_WIN32
+   //   if (argc == 2)
+   //      readFile(argv[1], board);
+   //#endif // !_WIN32
 
-	return 0;
+      //set everything into action
+   ui.run(callBack, &game);
+
+   return 0;
 }

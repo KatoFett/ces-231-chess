@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const char* Bishop::NAME = "BISHOP";
+const char Bishop::NAME = 'B';
 
 set<Square*> Bishop::getBishopMoves(Square* square)
 {

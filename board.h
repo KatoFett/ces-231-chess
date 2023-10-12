@@ -23,6 +23,7 @@ public:
    {}
 
    Square* operator [](const char* notation) const;
+   Square* operator [](const int index) const;
 
    Square* getSquare(int row, int col) const;
    int getIndexFromRowCol(int row, int col) const { return row * width + col; }

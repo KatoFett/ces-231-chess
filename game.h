@@ -42,15 +42,15 @@ public:
    }
 
    static Game& getInstance() { return *instance; }
-   Board& getBoard() { return *board; }
+   Board& getBoard() const { return *board; }
    Player& getCurrentTurn() const { return *players[currentTurn]; }
-   Player& getPlayer(int index) { return *players[index]; }
-   Move* getLastMoveEnPassant() const;
+   Player& getPlayer(int index) const { return *players[index]; }
+   Move* getLastMoveFromPlayer(Player& player) const;
+   Piece* getSelectedPiece() const { return selectedPiece; }
 
    void setSelectedPiece(Piece* piece) { selectedPiece = piece; }
 
    void initDefault(bool assignPieces);
-
    void move(Square* square);
 };
 

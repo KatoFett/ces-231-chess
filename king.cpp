@@ -6,7 +6,7 @@
 #include "player.h"
 #include <set>
 
-const char* King::NAME = "KING";
+const char King::NAME = 'K';
 
 set<Square*> King::getMoves() const
 {

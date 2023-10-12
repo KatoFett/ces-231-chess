@@ -8,5 +8,6 @@ public:
 private:
    void testInitDefault();
    void testMovePawn();
+   void testDefaultPieces();
 };
 

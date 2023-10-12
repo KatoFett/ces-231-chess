@@ -11,7 +11,7 @@
 
 using namespace std;
 
-const char* Pawn::NAME = "PAWN";
+const char Pawn::NAME = 'P';
 
 bool Pawn::checkEnPassant(Square* enPassantSquare) const
 {
@@ -23,13 +23,13 @@ bool Pawn::checkEnPassant(Square* enPassantSquare) const
    if (piece != nullptr && piece->getName() == Pawn::NAME)
    {
       // Make sure enpassantSquare is somehow not your piece
-      Player piecePlayer = piece->getPlayer();
+      Player& piecePlayer = piece->getPlayer();
       if (piecePlayer != player)
       {
-         Direction direction = player.getDirection();
+         const Direction direction = player.getDirection();
          
          // Check to make sure that the move was made last turn only and pawn made a two space jump
-         Move* lastMove = Game::getInstance().getLastMoveEnPassant();
+         Move* lastMove = Game::getInstance().getLastMoveFromPlayer(piecePlayer);
          if (lastMove != nullptr && enPassantSquare->getUp(direction)->getUp(direction) == lastMove->getFrom())
          {
             return true;
@@ -45,7 +45,7 @@ Square* Pawn::getEnPassantMove() const
    // especially in 2 - player chess.
    // But if there are, this function will need to be changed to return multiple squares.
 
-   Direction direction = player.getDirection();
+   const Direction direction = player.getDirection();
 
    // Check Left 
    Square* enPassantSquare = square->getLeft(direction);
@@ -66,7 +66,7 @@ Square* Pawn::getEnPassantMove() const
 
 set<Square*> Pawn::getMoves() const
 {
-   Direction direction = player.getDirection();
+   const Direction direction = player.getDirection();
 
    std::set<Square*> moves;
    Square* oneAhead = square->getUp(direction);

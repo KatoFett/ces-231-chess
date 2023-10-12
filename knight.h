@@ -15,8 +15,8 @@ public:
         : Piece(square, player)
     {}
 
-    static const char* NAME;
+    static const char NAME;
 
+    const char getName() const override { return NAME; }
     set<Square*> getMoves() const override;
-    const char* getName() const override { return NAME; }
 };

@@ -14,12 +14,12 @@ public:
 		: Piece(square, player)
 	{}
 
-	static const char* NAME;
+	static const char NAME;
 
 	/*int getRank();*/
 	void promote(Piece* toPiece);
 	std::set<Square*> getMoves() const override;
 	Square* getEnPassantMove() const;
 	bool checkEnPassant(Square* enPassantSquare) const;
-	const char* getName() const override { return NAME; }
+	const char getName() const override { return NAME; }
 };

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const char* Rook::NAME = "ROOK";
+const char Rook::NAME = 'R';
 
 set<Square*> Rook::getRookMoves(Square* square)
 {

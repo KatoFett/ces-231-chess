@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const char* Queen::NAME = "QUEEN";
+const char Queen::NAME = 'Q';
 
 set<Square*> Queen::getMoves() const
 {
