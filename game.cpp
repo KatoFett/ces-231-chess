@@ -8,6 +8,7 @@
 #include "bishop.h"
 #include "king.h"
 #include "queen.h"
+#include <cassert>
 
 Game* Game::instance;
 
@@ -92,7 +93,7 @@ void Game::addPlayer(Player& player)
    playerCount++;
 }
 
-Move* Game::getLastMoveFromPlayer(Player& player) const
+const Move* Game::getLastMoveFromPlayer(Player& player) const
 {
    if (!moves.empty())
    {
@@ -110,8 +111,30 @@ void Game::move(Square* square)
 {
    if (selectedPiece == nullptr) throw "Cannot move without first selecting a piece.";
 
-   Move* move = selectedPiece->moveToSquare(square);
+   const Direction direction = selectedPiece->getPlayer().getDirection();
+
+   const Move* move = selectedPiece->moveToSquare(square);
    moves.push_back(move);
+
+   if (move->getType() == CASTLE || move->getType() == CASTLE_LONG)
+   {
+      int distance = move->getType() == CASTLE ? 1 : 2;
+      Square* rookSquare = square->getLeft(direction, distance);
+      if (rookSquare != nullptr && rookSquare->getPiece() != nullptr && rookSquare->getPiece()->getName() == Rook::NAME)
+      {
+         // Move rook to the right.
+         rookSquare->getPiece()->moveToSquare(square->getRight(direction));
+      }
+      else
+      {
+         // Castle rook must be on the right.
+         rookSquare = square->getRight(direction, distance);
+         assert(rookSquare != nullptr);
+         assert(rookSquare->getPiece() != nullptr);
+         assert(rookSquare->getPiece()->getName() == Rook::NAME);
+         rookSquare->getPiece()->moveToSquare(square->getLeft(direction));
+      }
+   }
 
    bool playerFound = false;
 
@@ -122,7 +145,7 @@ void Game::move(Square* square)
       currentTurn++;
       if (currentTurn == playerCount)
          currentTurn = 0;
-      
+
       // Check if the player can play a move.
       // If the game is over, only the remaining player will have any pieces left.
       playerFound = players[currentTurn]->hasPieces();

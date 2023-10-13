@@ -29,5 +29,5 @@ public:
    Direction getDirection() const { return direction; }
    int* getColor() { return color; }
    void addPiece(Piece* piece) { pieces.insert(piece); }
-   void removePiece(Piece* piece) { pieces.erase(piece); }
+   void removePiece(Piece* piece);
 };

@@ -22,4 +22,5 @@ public:
 	Square* getEnPassantMove() const;
 	bool checkEnPassant(Square* enPassantSquare) const;
 	const char getName() const override { return NAME; }
+	const Move* getMoveFromSquare(Square* destination) override;
 };

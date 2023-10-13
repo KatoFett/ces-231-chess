@@ -29,11 +29,11 @@ public:
    Piece* getPiece() const { return piece; }
    bool getIsDark() const { return isDark; }
    string getNotation() const;
-   Square* getLeft(const Direction direction) const;
-   Square* getRight(const Direction direction) const;
-   Square* getUp(const Direction direction) const;
-   Square* getDown(const Direction direction) const;
-   Square* getAdjacent(int dRow, int dCol);
+   Square* getLeft(const Direction direction, const int distance = 1) const;
+   Square* getRight(const Direction direction, const int distance = 1) const;
+   Square* getUp(const Direction direction, const int distance = 1) const;
+   Square* getDown(const Direction direction, const int distance = 1) const;
+   Square* getAdjacent(int dRow, int dCol) const;
 
    void setPiece(Piece* newPiece) { piece = newPiece; }
    void setIndex(const int newIdx) { index = newIdx; }

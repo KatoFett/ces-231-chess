@@ -158,7 +158,7 @@ void TestGame::testMovePawn()
    assert(toSquare->getPiece() == &pawn);			// New square contains the pawn.
    assert(game.moves.size() == 1);					// Added new move.
 
-   Move* move = game.moves[0];
+   const Move* move = game.moves[0];
    assert(move->getPieceMoved() == &pawn);		   // Moved piece is the pawn.
    assert(move->getPieceCaptured() == nullptr);    // No captured piece.
    assert(move->getFrom() == fromSquare);		      // Correct from-square.

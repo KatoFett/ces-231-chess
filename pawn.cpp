@@ -8,6 +8,7 @@
 #include "player.h"
 #include "direction.h"
 #include <set>
+#include <cassert>
 
 using namespace std;
 
@@ -15,8 +16,8 @@ const char Pawn::NAME = 'P';
 
 bool Pawn::checkEnPassant(Square* enPassantSquare) const
 {
-    // check to make sure enPassantSquare is valid square
-    if (enPassantSquare == nullptr) return false;
+   // check to make sure enPassantSquare is valid square
+   if (enPassantSquare == nullptr) return false;
 
    // Piece is a valid piece and it is a pawn
    Piece* piece = enPassantSquare->getPiece();
@@ -27,9 +28,9 @@ bool Pawn::checkEnPassant(Square* enPassantSquare) const
       if (piecePlayer != player)
       {
          const Direction direction = player.getDirection();
-         
+
          // Check to make sure that the move was made last turn only and pawn made a two space jump
-         Move* lastMove = Game::getInstance().getLastMoveFromPlayer(piecePlayer);
+         const Move* lastMove = Game::getInstance().getLastMoveFromPlayer(piecePlayer);
          if (lastMove != nullptr && enPassantSquare->getUp(direction)->getUp(direction) == lastMove->getFrom())
          {
             return true;
@@ -69,33 +70,36 @@ set<Square*> Pawn::getMoves() const
    const Direction direction = player.getDirection();
 
    std::set<Square*> moves;
-   int deltas[][2] = {
-       {1,1}, {1,-1},
-       {-1,1}, {-1, -1}
-   };
+
    Square* oneAhead = square->getUp(direction);
 
-   //Check no piece is in front
-   if (oneAhead != nullptr && oneAhead->getPiece() == nullptr)
+   // Move ahead, can't capture ahead.
+   bool canMoveAhead = canMoveToSquare(player, oneAhead) && oneAhead->getPiece() == nullptr;
+   if (canMoveAhead)
       moves.insert(oneAhead);
-   //Check no piece in front or two ahead and pawn hasnt moved
-   if (oneAhead->getUp(direction) != nullptr && oneAhead->getUp(direction)->getPiece()  == nullptr && !hasMoved && oneAhead->getPiece() == nullptr)
-      moves.insert(oneAhead->getUp(direction));
-   //Check if enPassant is allowed
-   if (getEnPassantMove() != nullptr)
-       moves.insert(getEnPassantMove());
-   //capture
-   for (int* delta : deltas)
-   {
-       int row = *delta;
-       int col = *(delta + 1);
-       Square* destination = square->getAdjacent(row, col);
 
-       if (destination != nullptr && destination->getPiece() != nullptr && destination->getPiece()->getPlayer() != player)
-       {
-           moves.insert(destination);
-       }
+   // Capture left
+   Square* capture = oneAhead->getLeft(direction);
+   if (canMoveToSquare(player, capture) && capture->getPiece() != nullptr)
+      moves.insert(capture);
+
+   // Capture right
+   capture = oneAhead->getRight(direction);
+   if (canMoveToSquare(player, capture) && capture->getPiece() != nullptr)
+      moves.insert(capture);
+
+   // Move 2 squares on first move.
+   if (!hasMoved && canMoveAhead)
+   {
+      oneAhead = oneAhead->getUp(direction);
+      if (canMoveToSquare(player, oneAhead))
+         moves.insert(oneAhead);
    }
+
+   //Check if enPassant is allowed
+   Square* enPassant = getEnPassantMove();
+   if (enPassant != nullptr)
+      moves.insert(enPassant);
 
    return moves;
 }
@@ -106,4 +110,20 @@ void Pawn::promote(Piece* toPiece)
 
    player.removePiece(toPiece);
    square->setPiece(toPiece);
+}
+
+const Move* Pawn::getMoveFromSquare(Square* destination)
+{
+   if (destination == getEnPassantMove())
+   {
+      Square* capturedSquare = destination->getDown(player.getDirection());
+      assert(capturedSquare != nullptr);
+      Piece* captured = capturedSquare->getPiece();
+      assert(captured != nullptr);
+      assert(captured->getName() == Pawn::NAME);
+      assert(captured->getPlayer() != player);
+      return new Move(square, destination, this, captured);
+   }
+
+   return Piece::getMoveFromSquare(destination);
 }

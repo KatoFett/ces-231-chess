@@ -23,13 +23,13 @@ public:
    Player& getPlayer() const { return player; }
    bool getHasMoved() const { return hasMoved; }
    virtual const char getName() const = 0;
+   virtual const Move* getMoveFromSquare(Square* destination);
    virtual set<Square*> getMoves() const = 0;
-   virtual Move* getMoveFromSquare(Square* destination);
+   static bool canMoveToSquare(Player& player, Square* destination);
 
    void setHasMoved() { hasMoved = true; }
 
-   static bool canMoveToSquare(Player& player, Square* destination);
-   Move* moveToSquare(Square* destination);
+   const Move* moveToSquare(Square* destination);
 };
 
 

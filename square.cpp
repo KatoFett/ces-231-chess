@@ -14,22 +14,22 @@ string Square::getNotation() const
    return string({ colLetter, rankNum });
 }
 
-Square* Square::getLeft(Direction direction) const
+Square* Square::getLeft(Direction direction, int distance) const
 {
    int newCol = getCol(), newRow = getRow();
    switch (direction)
    {
    case UP:
-      newCol--;
+      newCol -= distance;
       break;
    case DOWN:
-      newCol++;
+      newCol += distance;
       break;
    case RIGHT:
-      newRow++;
+      newRow += distance;
       break;
    case LEFT:
-      newRow--;
+      newRow -= distance;
       break;
    default:
       throw "Invalid direction.";
@@ -38,22 +38,22 @@ Square* Square::getLeft(Direction direction) const
    return Game::getInstance().getBoard().getSquare(newRow, newCol);
 }
 
-Square* Square::getRight(Direction direction) const
+Square* Square::getRight(Direction direction, const int distance) const
 {
    int newCol = getCol(), newRow = getRow();
    switch (direction)
    {
    case UP:
-      newCol++;
+      newCol += distance;
       break;
    case DOWN:
-      newCol--;
+      newCol -= distance;
       break;
    case RIGHT:
-      newRow--;
+      newRow -= distance;
       break;
    case LEFT:
-      newRow++;
+      newRow += distance;
       break;
    default:
       throw "Invalid direction.";
@@ -62,22 +62,22 @@ Square* Square::getRight(Direction direction) const
    return Game::getInstance().getBoard().getSquare(newRow, newCol);
 }
 
-Square* Square::getUp(Direction direction) const
+Square* Square::getUp(Direction direction, const int distance) const
 {
    int newCol = getCol(), newRow = getRow();
    switch (direction)
    {
    case UP:
-      newRow++;
+      newRow += distance;
       break;
    case DOWN:
-      newRow--;
+      newRow -= distance;
       break;
    case RIGHT:
-      newCol++;
+      newCol += distance;
       break;
    case LEFT:
-      newCol--;
+      newCol -= distance;
       break;
    default:
       throw "Invalid direction.";
@@ -86,28 +86,35 @@ Square* Square::getUp(Direction direction) const
    return Game::getInstance().getBoard().getSquare(newRow, newCol);
 }
 
-Square* Square::getDown(Direction direction) const
+Square* Square::getDown(Direction direction, const int distance) const
 {
    int newCol = getCol(), newRow = getRow();
    switch (direction)
    {
    case UP:
-      newRow--;
+      newRow -= distance;
       break;
    case DOWN:
-      newRow++;
+      newRow += distance;
       break;
    case RIGHT:
-      newCol--;
+      newCol -= distance;
       break;
    case LEFT:
-      newCol++;
+      newCol += distance;
       break;
    default:
       throw "Invalid direction.";
    }
 
    return Game::getInstance().getBoard().getSquare(newRow, newCol);
+}
+
+Square* Square::getAdjacent(int dRow, int dCol) const
+{
+   dRow += getRow();
+   dCol += getCol();
+   return Game::getInstance().getBoard().getSquare(dRow, dCol);
 }
 
 int Square::getCol() const
@@ -120,12 +127,4 @@ int Square::getRow() const
 {
    int width = Game::getInstance().getBoard().getWidth();
    return index / width;
-}
-
-Square* Square::getAdjacent(int dRow, int dCol)
-{
-   if (dCol == 0 && dRow == 0) return this;
-   dRow += getRow();
-   dCol += getCol();
-   return Game::getInstance().getBoard().getSquare(dRow, dCol);
 }

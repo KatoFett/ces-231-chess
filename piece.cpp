@@ -10,15 +10,15 @@ Piece::Piece(Square* square, Player& player) :
    player.addPiece(this);
 }
 
-Move* Piece::moveToSquare(Square* destination)
+const Move* Piece::moveToSquare(Square* destination)
 {
-   Move* move = getMoveFromSquare(destination);
+   const Move* move = getMoveFromSquare(destination);
 
    // Set this square to empty.
    square->setPiece(nullptr);
 
    // Capture piece.
-   Piece* captured = destination->getPiece();
+   Piece* captured = move->getPieceCaptured();
    if (captured != nullptr)
       captured->player.removePiece(captured);
 
@@ -26,12 +26,14 @@ Move* Piece::moveToSquare(Square* destination)
    square = destination;
    destination->setPiece(this);
 
+   hasMoved = true;
+
    return move;
 }
 
-Move* Piece::getMoveFromSquare(Square* destination)
+const Move* Piece::getMoveFromSquare(Square* destination)
 {
-   Move* move = new Move(square, destination, this, destination->getPiece());
+   const Move* move = new Move(square, destination, this, destination->getPiece());
    return move;
 }
 

@@ -17,7 +17,7 @@ private:
    int playerCount;
    vector<Player*> players;
    int currentTurn;
-   vector<Move*> moves;
+   vector<const Move*> moves;
    Piece* selectedPiece;
 
    static Game* instance;
@@ -45,7 +45,7 @@ public:
    Board& getBoard() const { return *board; }
    Player& getCurrentTurn() const { return *players[currentTurn]; }
    Player& getPlayer(int index) const { return *players[index]; }
-   Move* getLastMoveFromPlayer(Player& player) const;
+   const Move* getLastMoveFromPlayer(Player& player) const;
    Piece* getSelectedPiece() const { return selectedPiece; }
 
    void setSelectedPiece(Piece* piece) { selectedPiece = piece; }
