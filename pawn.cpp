@@ -7,6 +7,7 @@
 #include "iostream"
 #include "player.h"
 #include "direction.h"
+#include "queen.h"
 #include <set>
 #include <cassert>
 
@@ -108,8 +109,7 @@ void Pawn::promote(Piece* toPiece)
 {
    if (toPiece == nullptr) throw "Cannot promote to null piece.";
 
-   player.removePiece(toPiece);
-   square->setPiece(toPiece);
+   player.removePiece(this);
 }
 
 const Move* Pawn::getMoveFromSquare(Square* destination)
@@ -126,4 +126,19 @@ const Move* Pawn::getMoveFromSquare(Square* destination)
    }
 
    return Piece::getMoveFromSquare(destination);
+}
+
+void Pawn::finishMove(const Move* move)
+{
+   // Increment the pawn's rank.
+   int dRow = move->getTo()->getRow() - move->getFrom()->getRow();
+   int dCol = move->getTo()->getCol() - move->getFrom()->getCol();
+   rank += max(abs(dRow), abs(dCol));
+
+   // Promote to queen
+   if (rank == 8)
+   {
+      Queen* queen = new Queen(square, player);
+      promote(queen);
+   }
 }

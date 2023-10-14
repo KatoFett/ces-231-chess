@@ -11,7 +11,7 @@ class Pawn : public Piece
 {
 public:
 	Pawn(Square* square, Player& player)
-		: Piece(square, player), rank(1)
+		: Piece(square, player), rank(2)
 	{}
 
 	static const char NAME;
@@ -23,9 +23,8 @@ public:
 	bool checkEnPassant(Square* enPassantSquare) const;
 	const char getName() const override { return NAME; }
 	const Move* getMoveFromSquare(Square* destination) override;
+	void finishMove(const Move* move) override;
 	int getRank() { return rank; }
-
-	void increment() { rank += 1; }
 
 private:
 	 int rank;

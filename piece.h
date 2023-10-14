@@ -25,6 +25,7 @@ public:
    virtual const char getName() const = 0;
    virtual const Move* getMoveFromSquare(Square* destination);
    virtual set<Square*> getMoves() const = 0;
+   virtual void finishMove(const Move* move) {};
    static bool canMoveToSquare(Player& player, Square* destination);
 
    void setHasMoved() { hasMoved = true; }
