@@ -25,12 +25,10 @@ public:
 	const Move* getMoveFromSquare(Square* destination) override;
 	int getRank() { return rank; }
 
-	Pawn& operator++()
-	{
-		 rank+=1;
-		 return *this;
-	}
+	void increment() { rank += 1; }
 
 private:
 	 int rank;
 };
+
+

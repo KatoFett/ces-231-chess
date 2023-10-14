@@ -135,12 +135,13 @@ void Game::move(Square* square)
          rookSquare->getPiece()->moveToSquare(square->getLeft(direction));
       }
    }
-   // If we move a pawn, increment the rank.
-   if (selectedPiece->getName() == Pawn::NAME)
+   // If we move a pawn, increment the rank. and check if we can promote
+   if (selectedPiece->getName() == 'P')
    {
        Pawn* pawn = (Pawn*)selectedPiece;
-       pawn++;
-       if (pawn->getRank() == 8)
+       pawn->increment();
+       //6 if double move first, 7 if not.
+       if (pawn->getRank() == 6 || pawn->getRank() == 7)
        {
            Queen queen = Queen(pawn->getSquare(), pawn->getPlayer());
            pawn->promote(&queen);
