@@ -135,6 +135,17 @@ void Game::move(Square* square)
          rookSquare->getPiece()->moveToSquare(square->getLeft(direction));
       }
    }
+   // If we move a pawn, increment the rank.
+   if (selectedPiece->getName() == Pawn::NAME)
+   {
+       Pawn* pawn = (Pawn*)selectedPiece;
+       pawn++;
+       if (pawn->getRank() == 8)
+       {
+           Queen queen = Queen(pawn->getSquare(), pawn->getPlayer());
+           pawn->promote(&queen);
+       }
+   }
 
    bool playerFound = false;
 
@@ -150,4 +161,7 @@ void Game::move(Square* square)
       // If the game is over, only the remaining player will have any pieces left.
       playerFound = players[currentTurn]->hasPieces();
    }
+
+      
+
 }
