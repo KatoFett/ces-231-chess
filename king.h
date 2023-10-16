@@ -16,12 +16,12 @@ public:
       : Piece(square, player)
    {}
 
-   static const char NAME;
+   static const char NAME; // The name of the piece.
 
-   const Move* getMoveFromSquare(Square* destination) override;
-   set<Square*> getMoves() const override;
-   set<Square*> getCastleMoves() const;
-   const char getName() const override { return NAME; }
-   Rook* getLeftCastleRook() const;
-   Rook* getRightCastleRook() const;
+   const Move* getMoveFromSquare(Square* destination) override; // Gets all possible moves from a designated square.
+   set<Square*> getMoves() const override; // Gets all possible moves of the king.
+   set<Square*> getCastleMoves() const; // Gets all possible castle moves.
+   const char getName() const override { return NAME; } // Returns the name of the piece.
+   Rook* getLeftCastleRook() const; // Determines if we can castle to the left.
+   Rook* getRightCastleRook() const; // Determines if we can castle to the right
 };
