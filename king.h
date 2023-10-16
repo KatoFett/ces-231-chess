@@ -18,7 +18,7 @@ public:
 
    static const char NAME; // The name of the piece.
 
-   const Move* getMoveFromSquare(Square* destination) override; // Gets all possible moves from a designated square.
+   const Move* getMoveFromSquare(Square* destination) override; // Returns a castle move if they are possible.
    set<Square*> getMoves() const override; // Gets all possible moves of the king.
    set<Square*> getCastleMoves() const; // Gets all possible castle moves.
    const char getName() const override { return NAME; } // Returns the name of the piece.

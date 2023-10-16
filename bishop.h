@@ -19,7 +19,7 @@ public:
 
     set<Square*> getMoves() const override { return getBishopMoves(this->square); }; // Returns all possible moves for the bishop.
     const char getName() const override { return NAME; } // Returns the name of the piece.
-    static set<Square*> getBishopMoves(Square* square); // Returns all possible moves of the bisop from a given square.
+    static set<Square*> getBishopMoves(const Square* square); // Returns all possible moves of the bisop from a given square.
 
 };
 

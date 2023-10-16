@@ -12,7 +12,7 @@ const char Bishop::NAME = 'B';
 * This will gather all the moves for the bishop piece. 
 * It will calculate the sliding of the bishop as well.
 */
-set<Square*> Bishop::getBishopMoves(Square* square)
+set<Square*> Bishop::getBishopMoves(const Square* square)
 {
 	 /*
 	 { -1,  1}, {  1,  1}

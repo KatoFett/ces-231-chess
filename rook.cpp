@@ -12,7 +12,7 @@ const char Rook::NAME = 'R';
 * This will get all possible moves for the rook from a square.
 * This will also account for the sliding of the rook.
 */
-set<Square*> Rook::getRookMoves(Square* square)
+set<Square*> Rook::getRookMoves(const Square* square)
 {
 	/*
 			{0,1}

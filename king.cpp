@@ -131,7 +131,7 @@ Rook* King::getRightCastleRook() const
 }
 
 /*
-* This will gather all possible moves of the king from a designated square.
+* This will return a castle move of the king if possible.
 */
 const Move* King::getMoveFromSquare(Square* destination)
 {

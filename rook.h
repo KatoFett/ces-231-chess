@@ -19,6 +19,6 @@ public:
 
    const char getName() const override { return NAME; } // Returns the name of the piece.
    set<Square*> getMoves() const override { return getRookMoves(this->square); }; // Returns the rooks possible moves.
-   static set<Square*> getRookMoves(Square* square); // Returns the rooks possible moves from a given square.
+   static set<Square*> getRookMoves(const Square* square); // Returns the rooks possible moves from a given square.
 };
 
