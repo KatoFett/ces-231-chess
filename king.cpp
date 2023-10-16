@@ -8,6 +8,10 @@
 
 const char King::NAME = 'K';
 
+/*
+* Gathers all possible moves for the king piece.
+* The king cannot slide, but can move in every direction.
+*/
 set<Square*> King::getMoves() const
 {
    /*
@@ -20,13 +24,18 @@ set<Square*> King::getMoves() const
 
    Player& player = square->getPiece()->getPlayer();
 
-
+   // All possible moves.
    int cols[] = { -1, 0, 1 };
    int rows[] = { -1, 0, 1 };
+
+   // For each column.
    for (int col : cols)
    {
+      // For each Row.
       for (int row : rows)
       {
+         // Get the square we are pointing to.
+         // If we can move there, add it to the list.
          Square* destination = square->getAdjacent(col, row);
          if (canMoveToSquare(player, destination)) moves.insert(destination);
       }
@@ -43,11 +52,18 @@ set<Square*> King::getMoves() const
    return moves;
 }
 
+/*
+* This will gather all possible catsling moves.
+* This will check both sides of the king, if the king has not moved.
+* If there is a rook on either side, with no pieces in the middle,
+* and neither the king or rook has moved, we can castle.
+*/
 set<Square*> King::getCastleMoves() const
 {
    set<Square*> moves;
    Direction direction = player.getDirection();
 
+   // If the king hasn't moved.
    if (!hasMoved)
    {
       // Check left rook.
@@ -70,36 +86,53 @@ set<Square*> King::getCastleMoves() const
    return moves;
 }
 
+/*
+* This will check if a rook exist on the left side of the king,
+* and if no pieces exist between the two.
+*/
 Rook* King::getLeftCastleRook() const
 {
    const Direction direction = player.getDirection();
    Square* rookSquare = square->getLeft(direction);
+
+   // Will run until we hit a piece or are out of bounds of the board.
    while (rookSquare != nullptr && rookSquare->getPiece() == nullptr)
    {
       rookSquare = rookSquare->getLeft(direction);
    }
 
+   // If we can castle.
    if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())
       return (Rook*)rookSquare->getPiece();
 
    return nullptr;
 }
 
+/*
+* This will check if a rook exist on the right side of the king,
+* and if no pieces exist between the two.
+*/
 Rook* King::getRightCastleRook() const
 {
    const Direction direction = player.getDirection();
    Square* rookSquare = square->getRight(direction);
+
+   // Will run until we hit a piece or are out of bounds of the board.
    while (rookSquare != nullptr && rookSquare->getPiece() == nullptr)
    {
       rookSquare = rookSquare->getRight(direction);
    }
 
+   // If we can castle.
    if (rookSquare != nullptr && rookSquare->getPiece()->getName() == Rook::NAME && !rookSquare->getPiece()->getHasMoved())
       return (Rook*)rookSquare->getPiece();
 
    return nullptr;
 }
 
+/*
+* This will return a castle move of the king if possible.
+*/
 const Move* King::getMoveFromSquare(Square* destination)
 {
    // Check if it's a castle square.

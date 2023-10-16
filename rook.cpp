@@ -8,7 +8,11 @@ using namespace std;
 
 const char Rook::NAME = 'R';
 
-set<Square*> Rook::getRookMoves(Square* square)
+/*
+* This will get all possible moves for the rook from a square.
+* This will also account for the sliding of the rook.
+*/
+set<Square*> Rook::getRookMoves(const Square* square)
 {
 	/*
 			{0,1}
@@ -17,6 +21,8 @@ set<Square*> Rook::getRookMoves(Square* square)
 	*/
 
 	set<Square*> moves;
+
+	// All possible moves.
 	int deltas[][2] = {
 			{0,1},
 			{0,-1},
