@@ -93,7 +93,7 @@ set<Square*> Pawn::getMoves() const
    if (!hasMoved && canMoveAhead)
    {
       oneAhead = oneAhead->getUp(direction);
-      if (canMoveToSquare(player, oneAhead))
+      if (canMoveToSquare(player, oneAhead) && oneAhead->getPiece() == nullptr)
          moves.insert(oneAhead);
    }
 
