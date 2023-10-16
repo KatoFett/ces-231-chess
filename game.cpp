@@ -10,8 +10,14 @@
 #include "queen.h"
 #include <cassert>
 
-Game* Game::instance;
+Game* Game::instance;   // Singleton instance of the current game.
 
+/*
+* INIT DEFAULT
+* Initializes the game and board to a default 8x8 board with white and black pieces.
+* Parameters:
+*    assignPieces: Whether the board should come with pieces (true) or be empty (false).
+*/
 void Game::initDefault(bool assignPieces)
 {
    int whiteColor[] = { 255, 255, 255 };
@@ -37,6 +43,7 @@ void Game::initDefault(bool assignPieces)
       }
    }
 
+   // Assign pieces.
    if (assignPieces)
    {
       for (int i = 0; i < 2; i++)
@@ -87,13 +94,21 @@ void Game::initDefault(bool assignPieces)
    }
 }
 
+/*
+* ADD PLAYER
+* Adds a player to the current game.
+*/
 void Game::addPlayer(Player& player)
 {
    players.push_back(&player);
    playerCount++;
 }
 
-const Move* Game::getLastMoveFromPlayer(Player& player) const
+/*
+* GET LAST MOVE FROM PLAYER
+* Gets the last moved executed by the provided player, or nullptr if none exists.
+*/
+const Move* Game::getLastMoveFromPlayer(const Player& player) const
 {
    if (!moves.empty())
    {
@@ -106,19 +121,26 @@ const Move* Game::getLastMoveFromPlayer(Player& player) const
    return nullptr;
 }
 
-
+/*
+* MOVE
+* Moves the selected piece to the provided square.
+*/
 void Game::move(Square* square)
 {
    if (selectedPiece == nullptr) throw "Cannot move without first selecting a piece.";
 
    const Direction direction = selectedPiece->getPlayer().getDirection();
 
+   // Create a move and add it to the internal list.
    const Move* move = selectedPiece->moveToSquare(square);
    moves.push_back(move);
 
+   // Move king and rook for castling.
    if (move->getType() == CASTLE || move->getType() == CASTLE_LONG)
    {
-      int distance = move->getType() == CASTLE ? 1 : 2;
+      int distance = move->getType() == CASTLE ? 1 : 2;  // Rook is 1 or 2 squares away from the destination.
+
+      // Check if rook is on the left.
       Square* rookSquare = square->getLeft(direction, distance);
       if (rookSquare != nullptr && rookSquare->getPiece() != nullptr && rookSquare->getPiece()->getName() == Rook::NAME)
       {
@@ -153,7 +175,4 @@ void Game::move(Square* square)
       // If the game is over, only the remaining player will have any pieces left.
       playerFound = players[currentTurn]->hasPieces();
    }
-
-      
-
 }

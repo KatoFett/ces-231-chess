@@ -54,9 +54,6 @@
     <ClCompile Include="queen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="move.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="testKing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -11,6 +11,11 @@ using namespace std;
 
 const char Queen::NAME = 'Q';
 
+/*
+* GET MOVES
+* Gets all squares this Queen can move to.
+* Moves are a combination of Bishop and Rook moves.
+*/
 set<Square*> Queen::getMoves() const
 {
    set<Square*> moves = Rook::getRookMoves(square);

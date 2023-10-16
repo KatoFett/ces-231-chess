@@ -7,6 +7,10 @@ using namespace std;
 
 class Square;
 
+/*
+* KNIGHT
+* The knight piece.
+*/
 class Knight : public Piece
 {
 public:

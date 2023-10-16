@@ -8,6 +8,10 @@ using namespace std;
 class Square;
 class Player;
 
+/*
+* QUEEN
+* The Queen piece.
+*/
 class Queen : public Piece
 {
 public:

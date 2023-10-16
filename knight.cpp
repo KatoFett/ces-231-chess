@@ -7,6 +7,10 @@
 
 const char Knight::NAME = 'N';
 
+/*
+* GET MOVES
+* Returns all the possible moves for this instance of a knight.
+*/
 set<Square*> Knight::getMoves() const
 {
    /*
@@ -21,6 +25,7 @@ set<Square*> Knight::getMoves() const
 
    set<Square*> moves;
 
+   // All possible squares
    int deltas[][2] = {
       {-1,  2},
       { 1,  2},
